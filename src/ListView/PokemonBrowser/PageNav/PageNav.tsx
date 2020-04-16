@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import PageNumberInput from "./PageNumberInput";
 import usePages from "../../usePages";
 import { Flex } from "../../../components/BaseComponents";

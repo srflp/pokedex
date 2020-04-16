@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Img from "react-image";
+import styled from "styled-components/macro";
 import { InitialPokemon, getPokemon } from "./getPokemon";
 import { capitalize } from "../common/helpers";
 import { BrightSection, Flex } from "../components/BaseComponents";
 import Button from "../components/Button";
 import Loader, { LoaderSmall } from "../components/Loader";
-import styled from "styled-components";
 import pokemonTypeColors from "../common/pokemonTypeColors";
 import Stat from "./Stat";
 

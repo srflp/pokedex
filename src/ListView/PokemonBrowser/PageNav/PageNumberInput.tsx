@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import usePages from "../../usePages";
 
 const PageNumberInputStyled = styled.input`

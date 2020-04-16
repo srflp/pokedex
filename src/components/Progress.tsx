@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 const Stat = styled.div<{ color: string; background?: string }>`
   background-color: ${({ background }) => background || "white"};

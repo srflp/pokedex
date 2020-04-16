@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { capitalize } from "../../common/helpers";
 import { useHistory } from "react-router-dom";
 import Img from "react-image";

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 const Button = styled.a`
   font-family: "VT323", monospace;
