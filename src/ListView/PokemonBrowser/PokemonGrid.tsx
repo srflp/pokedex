@@ -52,7 +52,7 @@ const PokemonGrid: React.FC = () => {
     const selectedPokemonTypes = getSelectedPokemonTypes();
     if (selectedPokemonTypes.length === 0) {
       const fetchAllPokemons = async () => {
-        const url = `https://pokeapi.co/api/v2/pokemon-species/?limit=1000`;
+        const url = `https://pokeapi.co/api/v2/pokemon/?limit=807`;
         const res = await fetch(url);
         const { count, results } = await res.json();
         setPokemons(parsePokemons(results));
