@@ -62,6 +62,7 @@ const Loader = styled.img`
 const Label = styled.div`
   font-family: "VT323", monospace;
   font-size: 1.3em;
+  white-space: nowrap;
   position: absolute;
   left: 50%;
   top: 100%;
