@@ -6,7 +6,7 @@ export interface NotReadyPokemon {
   ready: false;
 }
 
-interface PokemonStat {
+export interface PokemonStat {
   id: string;
   emoji: string;
   name: string;

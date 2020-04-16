@@ -8,7 +8,7 @@ import Button from "../components/Button";
 import Loader, { LoaderSmall } from "../components/Loader";
 import styled from "styled-components";
 import pokemonTypeColors from "../common/pokemonTypeColors";
-import Progress from "../components/Progress";
+import Stat from "./Stat";
 
 const TypeBadge = styled.div<{ type: string }>`
   font-size: 0.9rem;
@@ -71,7 +71,9 @@ const PokemonView: React.FC = () => {
             />
             <Flex>
               {pokemon.types.map((type) => (
-                <TypeBadge type={type}>{capitalize(type)}</TypeBadge>
+                <TypeBadge key={type} type={type}>
+                  {capitalize(type)}
+                </TypeBadge>
               ))}
             </Flex>
             <div
@@ -83,25 +85,12 @@ const PokemonView: React.FC = () => {
               }}
             >
               {pokemon.stats.map((stat) => (
-                <div key={stat.id}>
-                  <p
-                    style={{
-                      marginBottom: "0.3rem",
-                    }}
-                  >
-                    {stat.name}
-                    <span style={{ display: "block", float: "right" }}>
-                      {stat.value} <span role={"img"}>{stat.emoji}</span>
-                    </span>
-                  </p>
-                  <Progress
-                    value={stat.value}
-                    max={pokemon.maxStatValue}
-                    color={pokemonTypeColors[pokemon.types[0]]}
-                    background={"#faeee7"}
-                    style={{ marginBottom: "1rem" }}
-                  />
-                </div>
+                <Stat
+                  key={stat.id}
+                  max={pokemon.maxStatValue}
+                  color={pokemonTypeColors[pokemon.types[0]]}
+                  {...stat}
+                />
               ))}
             </div>
             <div>
