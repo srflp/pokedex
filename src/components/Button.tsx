@@ -1,19 +1,18 @@
 import styled from "styled-components/macro";
 
-const Button = styled.a`
+const Button = styled.button<{ hide?: boolean }>`
   font-family: "VT323", monospace;
   color: #33272a;
   background-color: rgb(235, 235, 235);
   padding: 0.75rem 0.75rem;
   font-size: 1.25rem;
   border-radius: 0.5rem;
-  text-decoration: none;
   cursor: pointer;
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none;
+  visibility: ${({ hide }) => (hide ? "hidden" : "visible")};
+  border: none;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
   &:hover {
     background-color: rgb(225, 225, 225);
   }

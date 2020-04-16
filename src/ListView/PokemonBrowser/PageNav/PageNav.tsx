@@ -44,8 +44,16 @@ const PageNav: React.FC<Props> = ({ pokemonBrowserRef, isTop }) => {
   return (
     <Nav>
       <Flex>
-        <Button onClick={() => handleNavButtonClick("first")}>&lt;&lt;</Button>
-        <Button onClick={() => handleNavButtonClick("previous")}>
+        <Button
+          onClick={() => handleNavButtonClick("first")}
+          hide={pages.current === 1}
+        >
+          &lt;&lt;
+        </Button>
+        <Button
+          onClick={() => handleNavButtonClick("previous")}
+          hide={pages.current === 1}
+        >
           &lt; prev
         </Button>
       </Flex>
@@ -53,8 +61,18 @@ const PageNav: React.FC<Props> = ({ pokemonBrowserRef, isTop }) => {
         page <PageNumberInput inputRef={inputRef} />/{pages.total}
       </PageNumber>
       <Flex>
-        <Button onClick={() => handleNavButtonClick("next")}>next &gt;</Button>
-        <Button onClick={() => handleNavButtonClick("last")}>&gt;&gt;</Button>
+        <Button
+          onClick={() => handleNavButtonClick("next")}
+          hide={pages.current === pages.total}
+        >
+          next &gt;
+        </Button>
+        <Button
+          onClick={() => handleNavButtonClick("last")}
+          hide={pages.current === pages.total}
+        >
+          &gt;&gt;
+        </Button>
       </Flex>
     </Nav>
   );
