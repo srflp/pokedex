@@ -1,9 +1,233 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="79d55cb8-c291-4b1b-ab76-9a5911b21d7a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/srflp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/android-chrome-192x192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/android-chrome-512x512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/apple-touch-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/favicon-16x16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/favicon-32x32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ListView/ListView.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ListView/PokemonBrowser/PageNav/PageNav.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ListView/PokemonBrowser/PageNav/PageNumberInput.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ListView/PokemonBrowser/PokemonBrowser.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ListView/PokemonBrowser/PokemonGrid.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ListView/PokemonBrowser/Tile.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ListView/Search.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ListView/TypeFilter.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ListView/usePages.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ListView/usePokemonTypes.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ListView/usePokemons.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ListView/useSearch.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/PokemonView/PokemonView.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/PokemonView/getPokemon.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/helpers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/loader-small.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/loader.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/pokeApiTypings.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/pokemonTypeColors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/BaseComponents.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Footer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Header.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Loader.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Progress.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks/useDebounce.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks/useFetch.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.test.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviceWorker.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/setupTests.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/setupTests.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
   <component name="ProjectId" id="1a8ooB1KDzMQejzwVtC4zLafaNa" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="run.prettier.on.save" value="true" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.completion" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/common" />
+      <recent name="$PROJECT_DIR$/src/ListView" />
+      <recent name="$PROJECT_DIR$/src/ListView/PokemonBrowser" />
+      <recent name="$PROJECT_DIR$/src/ListView/TypeFilter" />
+      <recent name="$PROJECT_DIR$/src/PokemonView" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.npm start">
+    <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="npm start" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="1" Folder0="$USER_HOME$/Applications/JetBrains Toolbox" CustomDictionaries="1" CustomDictionary0="$USER_HOME$/Applications/JetBrains Toolbox/pl_PL.dic" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="project-level" UseSingleDictionary="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="79d55cb8-c291-4b1b-ab76-9a5911b21d7a" name="Default Changelist" comment="" />
+      <created>1586126755192</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586126755192</updated>
+      <workItem from="1586126762722" duration="7474000" />
+      <workItem from="1586184502903" duration="21691000" />
+      <workItem from="1586268690330" duration="8355000" />
+      <workItem from="1586363008768" duration="8192000" />
+      <workItem from="1586379196514" duration="10844000" />
+      <workItem from="1586441098965" duration="266000" />
+      <workItem from="1586444357117" duration="10000" />
+      <workItem from="1586444749446" duration="185000" />
+      <workItem from="1586444974293" duration="23659000" />
+      <workItem from="1586512306211" duration="8371000" />
+      <workItem from="1586536097841" duration="8893000" />
+      <workItem from="1586551357947" duration="12599000" />
+      <workItem from="1586605457607" duration="47227000" />
+      <workItem from="1586737354041" duration="5500000" />
+      <workItem from="1586776823356" duration="79482000" />
+      <workItem from="1586953019830" duration="27496000" />
+      <workItem from="1587031276303" duration="2733000" />
+      <workItem from="1587039048818" duration="4777000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="687" y="349" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1586477526008">
+      <screen x="4" y="0" width="1916" height="1080" />
+    </state>
+    <state x="687" y="349" key="#com.intellij.fileTypes.FileTypeChooser/4.0.1916.1080/0.1080.1440.900@4.0.1916.1080" timestamp="1586477526008" />
+    <state x="644" y="306" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper" timestamp="1586891766281">
+      <screen x="4" y="0" width="1916" height="1080" />
+    </state>
+    <state x="644" y="306" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper/4.0.1916.1080/0.1103.1440.877@4.0.1916.1080" timestamp="1586891766281" />
+    <state x="773" y="263" key="#com.intellij.ide.util.MemberChooser" timestamp="1586717073471">
+      <screen x="4" y="0" width="1916" height="1080" />
+    </state>
+    <state x="773" y="263" key="#com.intellij.ide.util.MemberChooser/4.0.1916.1080/0.1080.1440.900@4.0.1916.1080" timestamp="1586717073471" />
+    <state width="1899" height="286" key="GridCell.Tab.0.bottom" timestamp="1586217321103">
+      <screen x="4" y="0" width="1916" height="1080" />
+    </state>
+    <state width="1899" height="286" key="GridCell.Tab.0.bottom/4.0.1916.1080/0.1080.1440.900@4.0.1916.1080" timestamp="1586217321103" />
+    <state width="1899" height="286" key="GridCell.Tab.0.bottom/4.0.1916.1080/0.1103.1440.877@4.0.1916.1080" timestamp="1586183309206" />
+    <state width="1899" height="286" key="GridCell.Tab.0.center" timestamp="1586217321101">
+      <screen x="4" y="0" width="1916" height="1080" />
+    </state>
+    <state width="1899" height="286" key="GridCell.Tab.0.center/4.0.1916.1080/0.1080.1440.900@4.0.1916.1080" timestamp="1586217321101" />
+    <state width="1899" height="286" key="GridCell.Tab.0.center/4.0.1916.1080/0.1103.1440.877@4.0.1916.1080" timestamp="1586183309203" />
+    <state width="1899" height="286" key="GridCell.Tab.0.left" timestamp="1586217321100">
+      <screen x="4" y="0" width="1916" height="1080" />
+    </state>
+    <state width="1899" height="286" key="GridCell.Tab.0.left/4.0.1916.1080/0.1080.1440.900@4.0.1916.1080" timestamp="1586217321100" />
+    <state width="1899" height="286" key="GridCell.Tab.0.left/4.0.1916.1080/0.1103.1440.877@4.0.1916.1080" timestamp="1586183309201" />
+    <state width="1899" height="286" key="GridCell.Tab.0.right" timestamp="1586217321102">
+      <screen x="4" y="0" width="1916" height="1080" />
+    </state>
+    <state width="1899" height="286" key="GridCell.Tab.0.right/4.0.1916.1080/0.1080.1440.900@4.0.1916.1080" timestamp="1586217321102" />
+    <state width="1899" height="286" key="GridCell.Tab.0.right/4.0.1916.1080/0.1103.1440.877@4.0.1916.1080" timestamp="1586183309205" />
+    <state x="548" y="282" key="IDE.errors.dialog" timestamp="1586912291619">
+      <screen x="4" y="0" width="1916" height="1080" />
+    </state>
+    <state x="548" y="282" key="IDE.errors.dialog/4.0.1916.1080/0.1103.1440.877@4.0.1916.1080" timestamp="1586912291619" />
+    <state x="415" y="158" width="1266" height="722" key="SettingsEditor" timestamp="1586891829220">
+      <screen x="4" y="0" width="1916" height="1080" />
+    </state>
+    <state x="458" y="93" key="SettingsEditor/4.0.1436.900@4.0.1436.900" timestamp="1586692142703" />
+    <state x="561" y="123" width="1266" height="722" key="SettingsEditor/4.0.1916.1080/0.1080.1440.900@4.0.1916.1080" timestamp="1586818418031" />
+    <state x="415" y="158" key="SettingsEditor/4.0.1916.1080/0.1103.1440.877@4.0.1916.1080" timestamp="1586891829220" />
+    <state x="749" y="464" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586972335990">
+      <screen x="4" y="0" width="1916" height="1080" />
+    </state>
+    <state x="749" y="464" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/4.0.1916.1080/0.1080.1440.900@4.0.1916.1080" timestamp="1586972335990" />
+    <state x="749" y="464" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/4.0.1916.1080/0.1103.1440.877@4.0.1916.1080" timestamp="1586380266817" />
+    <state x="660" y="136" width="600" height="807" key="find.popup" timestamp="1586822417665">
+      <screen x="4" y="0" width="1916" height="1080" />
+    </state>
+    <state x="660" y="136" width="600" height="807" key="find.popup/4.0.1916.1080/0.1103.1440.877@4.0.1916.1080" timestamp="1586822417665" />
+    <state x="625" y="255" key="run.anything.popup" timestamp="1587001604692">
+      <screen x="4" y="0" width="1916" height="1080" />
+    </state>
+    <state x="625" y="255" key="run.anything.popup/4.0.1916.1080/0.1103.1440.877@4.0.1916.1080" timestamp="1587001604692" />
+    <state x="625" y="241" width="670" height="676" key="search.everywhere.popup" timestamp="1586881430478">
+      <screen x="4" y="0" width="1916" height="1080" />
+    </state>
+    <state x="469" y="201" width="670" height="158" key="search.everywhere.popup/4.0.1436.900@4.0.1436.900" timestamp="1586709722145" />
+    <state x="625" y="241" width="670" height="158" key="search.everywhere.popup/4.0.1916.1080/0.1080.1440.900@4.0.1916.1080" timestamp="1586612493902" />
+    <state x="625" y="241" width="670" height="676" key="search.everywhere.popup/4.0.1916.1080/0.1103.1440.877@4.0.1916.1080" timestamp="1586881430478" />
   </component>
 </project>
