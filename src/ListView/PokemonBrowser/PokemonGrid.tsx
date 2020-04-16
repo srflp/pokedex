@@ -95,9 +95,14 @@ const PokemonGrid: React.FC = () => {
   }, [dispatchPages, pokemonTypes, getSelectedPokemonTypes]);
 
   useEffect(() => {
-    const newFilteredPokemons = pokemons.filter((pokemon) =>
-      pokemon.name.includes(search.term)
-    );
+    const newFilteredPokemons = pokemons
+      .filter((pokemon) => pokemon.name.includes(search.term))
+      // sort lexicographically
+      .sort((a, b) => (a.name < b.name ? -1 : 1))
+      // sort by the index of found substring in the word
+      .sort(
+        (a, b) => a.name.indexOf(search.term) - b.name.indexOf(search.term)
+      );
     setFilteredPokemons(newFilteredPokemons);
     dispatchPages({ type: "first" });
     dispatchPages({
