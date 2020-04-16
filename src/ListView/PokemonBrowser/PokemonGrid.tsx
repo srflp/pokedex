@@ -49,11 +49,9 @@ const PokemonGrid: React.FC = () => {
   }, [pokemonTypes, dispatchPages]);
 
   useEffect(() => {
-    console.log("try to fetch pokemons");
     const selectedPokemonTypes = getSelectedPokemonTypes();
     if (selectedPokemonTypes.length === 0) {
       const fetchAllPokemons = async () => {
-        console.log("fetch ALL pokemons");
         const url = `https://pokeapi.co/api/v2/pokemon-species/?limit=1000`;
         const res = await fetch(url);
         const { count, results } = await res.json();
@@ -65,7 +63,6 @@ const PokemonGrid: React.FC = () => {
       };
       fetchAllPokemons();
     } else {
-      console.log("fetch SOME pokemons");
       let fetchedPokemons: Pokemon[] = [];
       const fetchedPokemonNamesSet = new Set();
       const fetchAllPokemonsOfType = async () => {
@@ -82,7 +79,6 @@ const PokemonGrid: React.FC = () => {
           });
         };
         for (const pokemonType of selectedPokemonTypes) {
-          console.log(`fetch '${pokemonType}' pokemons`);
           await fetchPokemonsOfType(pokemonType);
         }
         fetchedPokemons = fetchedPokemons

@@ -6,8 +6,6 @@ import { PagesProvider } from "./usePages";
 import { SearchProvider } from "./useSearch";
 
 const ListView: React.FC = () => {
-  console.log("ListView render");
-
   return (
     <>
       <TypeFilter />
