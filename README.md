@@ -26,4 +26,4 @@ Czyli to co planuję dodać w najbliższym czasie:
 - przejście ze stanem na Reduxa lub inną alternatywę (tu także do zapytań asynchronicznych do API przydałby się Redux Thunk/Saga), bo trudno jest zachować dobrą wydajność korzystając z samego hooka useContext i przekazywania propsów
 - 100% stanu aplikacji ma być trzymane w URLu (strona i wybrane filtry), po przejściu na Reduxa powinno być to łatwiejsze
 - wybór ilości Pokemonów wyświetlanych na stronie w zależności od ilości wyświetlanych kolumn/szerokości ekranu
-- filtrowanie do kolorach, wyświetlanie ewolucji pokemonów, zmiana dostawcy zdjęć z PokeAPI na lepszego
+- filtrowanie po kolorach, wyświetlanie ewolucji pokemonów, zmiana dostawcy zdjęć z PokeAPI na lepszego
