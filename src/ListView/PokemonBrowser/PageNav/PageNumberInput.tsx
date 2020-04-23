@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components/macro";
-import usePages from "../../usePages";
+import { page, PageAction } from "../../../store/page/pageSlice";
+import { useTypedSelector } from "../../../configureStore";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
 
 const PageNumberInputStyled = styled.input`
   font-family: "VT323", monospace;
@@ -22,12 +25,13 @@ interface Props {
 }
 
 const PageNumberInput = ({ className, inputRef }: Props) => {
-  const { pages, dispatchPages } = usePages();
-  const [inputValue, setInputValue] = useState(pages.current.toString());
+  const dispatch = useDispatch<Dispatch<PageAction>>();
+  const currentPage = useTypedSelector((state) => state.page.current);
+  const [inputValue, setInputValue] = useState(currentPage.toString());
 
   useEffect(() => {
-    setInputValue(pages.current.toString());
-  }, [setInputValue, pages]);
+    setInputValue(currentPage.toString());
+  }, [currentPage, setInputValue]);
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,15 +47,11 @@ const PageNumberInput = ({ className, inputRef }: Props) => {
   }, []);
 
   const updatePageNumber = useCallback(() => {
-    if (inputValue === "") {
-      setInputValue(pages.current.toString());
-    } else {
-      dispatchPages({
-        type: "set_current",
-        payload: parseInt(inputValue.slice(-2)),
-      });
+    if (inputValue !== "") {
+      dispatch(page.setCurrent(parseInt(inputValue.slice(-2))));
     }
-  }, [dispatchPages, inputValue, pages, setInputValue]);
+    setInputValue(currentPage.toString());
+  }, [dispatch, currentPage, inputValue, setInputValue]);
 
   const handleEnter = useCallback(
     (e: React.KeyboardEvent) => {

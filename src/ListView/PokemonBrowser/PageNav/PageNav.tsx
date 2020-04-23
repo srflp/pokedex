@@ -1,7 +1,10 @@
 import React, { useCallback, useRef } from "react";
 import styled from "styled-components/macro";
+import { Dispatch } from "redux";
+import { useDispatch } from "react-redux";
+import { useTypedSelector } from "../../../configureStore";
+import { page, PageAction } from "../../../store/page/pageSlice";
 import PageNumberInput from "./PageNumberInput";
-import usePages from "../../usePages";
 import { Flex } from "../../../components/BaseComponents";
 import Button from "../../../components/Button";
 
@@ -28,48 +31,48 @@ interface Props {
 }
 
 const PageNav: React.FC<Props> = ({ pokemonBrowserRef, isTop }) => {
+  const dispatch = useDispatch<Dispatch<PageAction>>();
+  const currentPage = useTypedSelector((state) => state.page.current);
+  const totalPages = useTypedSelector((state) => state.page.total);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { pages, dispatchPages } = usePages();
+
   const handleNavButtonClick = useCallback(
-    (page: "first" | "previous" | "next" | "last") => {
-      if (isTop) {
-        dispatchPages({ type: page });
-      } else {
-        dispatchPages({ type: page, scrollTo: pokemonBrowserRef });
-      }
+    (action: PageAction) => {
+      dispatch(action);
+      if (!isTop) pokemonBrowserRef.current?.scrollIntoView();
     },
-    [pokemonBrowserRef, isTop, dispatchPages]
+    [pokemonBrowserRef, isTop, dispatch]
   );
 
   return (
     <Nav>
       <Flex>
         <Button
-          onClick={() => handleNavButtonClick("first")}
-          hide={pages.current === 1}
+          onClick={() => handleNavButtonClick(page.first())}
+          hide={currentPage === 1}
         >
           &lt;&lt;
         </Button>
         <Button
-          onClick={() => handleNavButtonClick("previous")}
-          hide={pages.current === 1}
+          onClick={() => handleNavButtonClick(page.prev())}
+          hide={currentPage === 1}
         >
           &lt; prev
         </Button>
       </Flex>
       <PageNumber onClick={() => inputRef?.current?.focus()}>
-        page <PageNumberInput inputRef={inputRef} />/{pages.total}
+        page <PageNumberInput inputRef={inputRef} />/{totalPages}
       </PageNumber>
       <Flex>
         <Button
-          onClick={() => handleNavButtonClick("next")}
-          hide={pages.current === pages.total}
+          onClick={() => handleNavButtonClick(page.next())}
+          hide={currentPage === totalPages}
         >
           next &gt;
         </Button>
         <Button
-          onClick={() => handleNavButtonClick("last")}
-          hide={pages.current === pages.total}
+          onClick={() => dispatch(page.last())}
+          hide={currentPage === totalPages}
         >
           &gt;&gt;
         </Button>

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Tile from "./Tile";
 import { Grid } from "../../components/BaseComponents";
-import usePages from "../usePages";
 import usePokemonTypes from "../usePokemonTypes";
 import useDebounce from "../../hooks/useDebounce";
 import useSearch from "../useSearch";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
+import { page, PageAction } from "../../store/page/pageSlice";
+import { useTypedSelector } from "../../configureStore";
 
 interface Pokemon {
   id: number;
@@ -37,16 +40,17 @@ const parsePokemons = (rawPokemons: RawPokemon[]): Pokemon[] => {
 const pokemonsPerPage = 60;
 
 const PokemonGrid: React.FC = () => {
-  const { pages, dispatchPages } = usePages();
+  const dispatch = useDispatch<Dispatch<PageAction>>();
+  const currentPage = useTypedSelector((state) => state.page.current);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [filteredPokemons, setFilteredPokemons] = useState<Pokemon[]>([]);
   const { pokemonTypes, getSelectedPokemonTypes } = usePokemonTypes();
-  const debouncedCurrentPage = useDebounce(pages.current, 200);
+  const debouncedCurrentPage = useDebounce(currentPage, 200);
   const { search } = useSearch();
 
   useEffect(() => {
-    dispatchPages({ type: "first" });
-  }, [pokemonTypes, dispatchPages]);
+    dispatch(page.first());
+  }, [dispatch, pokemonTypes]);
 
   useEffect(() => {
     const selectedPokemonTypes = getSelectedPokemonTypes();
@@ -54,12 +58,9 @@ const PokemonGrid: React.FC = () => {
       const fetchAllPokemons = async () => {
         const url = `https://pokeapi.co/api/v2/pokemon/?limit=807`;
         const res = await fetch(url);
-        const { count, results } = await res.json();
+        const { results } = await res.json();
         setPokemons(parsePokemons(results));
-        dispatchPages({
-          type: "set_total",
-          payload: Math.ceil(count / pokemonsPerPage),
-        });
+        dispatch(page.setTotal(Math.ceil(results.length / pokemonsPerPage)));
       };
       fetchAllPokemons();
     } else {
@@ -85,14 +86,13 @@ const PokemonGrid: React.FC = () => {
           .filter((p) => p.id < 1000)
           .sort((p1, p2) => p1.id - p2.id);
         setPokemons(fetchedPokemons);
-        dispatchPages({
-          type: "set_total",
-          payload: Math.ceil(fetchedPokemons.length / pokemonsPerPage),
-        });
+        dispatch(
+          page.setTotal(Math.ceil(fetchedPokemons.length / pokemonsPerPage))
+        );
       };
       fetchAllPokemonsOfType();
     }
-  }, [dispatchPages, pokemonTypes, getSelectedPokemonTypes]);
+  }, [dispatch, pokemonTypes, getSelectedPokemonTypes]);
 
   useEffect(() => {
     const newFilteredPokemons = pokemons
@@ -104,12 +104,11 @@ const PokemonGrid: React.FC = () => {
         (a, b) => a.name.indexOf(search.term) - b.name.indexOf(search.term)
       );
     setFilteredPokemons(newFilteredPokemons);
-    dispatchPages({ type: "first" });
-    dispatchPages({
-      type: "set_total",
-      payload: Math.ceil(newFilteredPokemons.length / pokemonsPerPage),
-    });
-  }, [search.term, pokemons, dispatchPages]);
+    dispatch(page.first());
+    dispatch(
+      page.setTotal(Math.ceil(newFilteredPokemons.length / pokemonsPerPage))
+    );
+  }, [dispatch, search.term, pokemons]);
 
   return (
     <Grid>
