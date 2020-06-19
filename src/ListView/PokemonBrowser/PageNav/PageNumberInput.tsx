@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components/macro";
-import usePages from "../../usePages";
+import { page } from "../../../store/page/pageSlice";
+import { useTypedSelector } from "../../../configureStore";
+import { useDispatch } from "react-redux";
+import totalSelector from "../../../store/page/totalSelector";
 
 const PageNumberInputStyled = styled.input`
   font-family: "VT323", monospace;
@@ -22,36 +25,36 @@ interface Props {
 }
 
 const PageNumberInput = ({ className, inputRef }: Props) => {
-  const { pages, dispatchPages } = usePages();
-  const [inputValue, setInputValue] = useState(pages.current.toString());
+  const dispatch = useDispatch();
+  const currentPage = useTypedSelector((state) => state.page.current);
+  const totalPages = useTypedSelector(totalSelector);
+  const [inputValue, setInputValue] = useState(currentPage.toString());
 
   useEffect(() => {
-    setInputValue(pages.current.toString());
-  }, [setInputValue, pages]);
+    setInputValue(currentPage.toString());
+  }, [currentPage]);
 
-  const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      // allows only numbers as input
-      const numericValue = e.target.value.replace(/\D/, "");
-      setInputValue(numericValue);
-    },
-    [setInputValue]
-  );
-
-  const handleFocus = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
-    e.target.select();
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const numericValue = e.target.value.replace(/\D/, "");
+    setInputValue(numericValue);
   }, []);
 
   const updatePageNumber = useCallback(() => {
-    if (inputValue === "") {
-      setInputValue(pages.current.toString());
+    if (inputValue !== "") {
+      const parsedPage = parseInt(inputValue.slice(-2));
+      if (parsedPage < 1) {
+        dispatch(page.setCurrent(1));
+        setInputValue(currentPage.toString());
+      } else if (parsedPage > totalPages) {
+        dispatch(page.setCurrent(totalPages));
+        setInputValue(currentPage.toString());
+      } else {
+        dispatch(page.setCurrent(parsedPage));
+      }
     } else {
-      dispatchPages({
-        type: "set_current",
-        payload: parseInt(inputValue.slice(-2)),
-      });
+      setInputValue(currentPage.toString());
     }
-  }, [dispatchPages, inputValue, pages, setInputValue]);
+  }, [dispatch, inputValue, setInputValue, currentPage, totalPages]);
 
   const handleEnter = useCallback(
     (e: React.KeyboardEvent) => {
@@ -62,6 +65,10 @@ const PageNumberInput = ({ className, inputRef }: Props) => {
     },
     [updatePageNumber, inputRef]
   );
+
+  const handleFocus = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
+    e.target.select();
+  }, []);
 
   return (
     <PageNumberInputStyled

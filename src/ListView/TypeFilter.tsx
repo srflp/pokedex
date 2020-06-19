@@ -1,10 +1,14 @@
 import React from "react";
 import { capitalize } from "../common/helpers";
 import styled from "styled-components/macro";
-import usePokemonTypes from "./usePokemonTypes";
 import pokemonTypeColors from "../common/pokemonTypeColors";
 import { FlexCentered, BrightSection } from "../components/BaseComponents";
 import Loader from "../components/Loader";
+import { useTypedSelector } from "../configureStore";
+import { selectedTypesActions } from "../store/filter/selectedTypesSlice";
+import { useDispatch } from "react-redux";
+import { typesWithPokemonNamesActions } from "../store/pokemon/typesWithPokemonNames";
+import { page } from "../store/page/pageSlice";
 
 const FilterTitle = styled.h2`
   font-weight: 500;
@@ -67,11 +71,14 @@ const Button = styled.button<{ selected: boolean }>`
 `;
 
 const TypeFilter: React.FC = () => {
-  const {
-    pokemonTypes,
-    dispatchPokemonTypes,
-    getSelectedPokemonTypes,
-  } = usePokemonTypes();
+  const dispatch = useDispatch();
+  const pokemonTypes = useTypedSelector((state) => state.pokemon.types);
+  const pokemonTypesWithNames = useTypedSelector(
+    (state) => state.pokemon.typesWithPokemonNames
+  );
+  const selectedPokemonTypes = useTypedSelector(
+    (state) => state.filter.selectedTypes
+  );
 
   return (
     <BrightSection>
@@ -80,20 +87,24 @@ const TypeFilter: React.FC = () => {
           <FilterTitle>filter by type</FilterTitle>
           <ButtonContainer>
             <Button
-              onClick={() => dispatchPokemonTypes({ type: "disable_all" })}
-              selected={getSelectedPokemonTypes().length === 0}
+              onClick={() => dispatch(selectedTypesActions.clear())}
+              selected={selectedPokemonTypes.length === 0}
               color={pokemonTypeColors["none"]}
             >
               All
             </Button>
-            {pokemonTypes.map(([type, isSelected]) => (
+            {pokemonTypes.map((type) => (
               <Button
                 key={type}
                 value={type}
-                onClick={() =>
-                  dispatchPokemonTypes({ type: "toggle", payload: type })
-                }
-                selected={isSelected}
+                onClick={() => {
+                  if (!pokemonTypesWithNames.hasOwnProperty(type)) {
+                    dispatch(typesWithPokemonNamesActions.fetchRequested(type));
+                  }
+                  dispatch(selectedTypesActions.toggle(type));
+                  dispatch(page.setCurrent(1));
+                }}
+                selected={selectedPokemonTypes.includes(type)}
                 color={pokemonTypeColors[type]}
               >
                 {capitalize(type)}
