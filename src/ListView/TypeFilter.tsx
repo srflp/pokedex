@@ -87,7 +87,10 @@ const TypeFilter: React.FC = () => {
           <FilterTitle>filter by type</FilterTitle>
           <ButtonContainer>
             <Button
-              onClick={() => dispatch(selectedTypesActions.clear())}
+              onClick={() => {
+                dispatch(selectedTypesActions.clear());
+                dispatch(page.setCurrent(1));
+              }}
               selected={selectedPokemonTypes.length === 0}
               color={pokemonTypeColors["none"]}
             >

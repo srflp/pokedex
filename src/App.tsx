@@ -6,7 +6,6 @@ import Header from "./components/Header";
 import ListView from "./ListView/ListView";
 import PokemonView from "./PokemonView/PokemonView";
 import Footer from "./components/Footer";
-import { PokemonTypesProvider } from "./ListView/usePokemonTypes";
 
 const App: React.FC = () => {
   return (
@@ -16,9 +15,7 @@ const App: React.FC = () => {
         <QueryParamProvider ReactRouterRoute={Route}>
           <Switch>
             <Route path={"/"} exact>
-              <PokemonTypesProvider>
-                <ListView />
-              </PokemonTypesProvider>
+              <ListView />
             </Route>
             <Route path={"/pokemon/:pokemonName"}>
               <PokemonView />
