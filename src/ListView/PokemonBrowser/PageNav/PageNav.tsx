@@ -7,6 +7,7 @@ import { page, PageAction } from "../../../store/page/pageSlice";
 import PageNumberInput from "./PageNumberInput";
 import { Flex } from "../../../components/BaseComponents";
 import Button from "../../../components/Button";
+import totalSelector from "../../../store/page/totalSelector";
 
 const Nav = styled.nav`
   display: flex;
@@ -33,7 +34,7 @@ interface Props {
 const PageNav: React.FC<Props> = ({ pokemonBrowserRef, isTop }) => {
   const dispatch = useDispatch<Dispatch<PageAction>>();
   const currentPage = useTypedSelector((state) => state.page.current);
-  const totalPages = useTypedSelector((state) => state.page.total);
+  const totalPages = useTypedSelector(totalSelector);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleNavButtonClick = useCallback(
@@ -48,7 +49,7 @@ const PageNav: React.FC<Props> = ({ pokemonBrowserRef, isTop }) => {
     <Nav>
       <Flex>
         <Button
-          onClick={() => handleNavButtonClick(page.first())}
+          onClick={() => handleNavButtonClick(page.setCurrent(1))}
           hide={currentPage === 1}
         >
           &lt;&lt;
@@ -65,13 +66,15 @@ const PageNav: React.FC<Props> = ({ pokemonBrowserRef, isTop }) => {
       </PageNumber>
       <Flex>
         <Button
-          onClick={() => handleNavButtonClick(page.next())}
+          onClick={() => {
+            handleNavButtonClick(page.next());
+          }}
           hide={currentPage === totalPages}
         >
           next &gt;
         </Button>
         <Button
-          onClick={() => dispatch(page.last())}
+          onClick={() => dispatch(page.setCurrent(totalPages))}
           hide={currentPage === totalPages}
         >
           &gt;&gt;

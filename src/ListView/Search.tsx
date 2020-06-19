@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components/macro";
 import { BrightSection } from "../components/BaseComponents";
-import useSearch from "./useSearch";
+import { useDispatch } from "react-redux";
+import { search } from "../store/filter/searchSlice";
+import { page } from "../store/page/pageSlice";
 
 const SearchInput = styled.input`
   font-size: 1.7rem;
@@ -28,10 +30,13 @@ const SearchInput = styled.input`
 `;
 
 const Search: React.FC = () => {
-  const { setSearch } = useSearch();
+  const dispatch = useDispatch();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch({ term: e.target.value.toLowerCase() });
+    dispatch(search.set(e.target.value.toLowerCase()));
+    dispatch(page.setCurrent(1));
   };
+
   return (
     <BrightSection>
       <SearchInput

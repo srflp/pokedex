@@ -1,4 +1,5 @@
 export namespace PokeAPI {
+  // Common models
   export interface APIResourceList<T extends NamedAPIResource | APIResource> {
     count: number;
     next: string | null;
@@ -14,6 +15,17 @@ export namespace PokeAPI {
     name: string;
   }
 
+  export interface GenerationGameIndex {
+    game_index: number;
+    generation: NamedAPIResource;
+  }
+
+  export interface Name {
+    name: string;
+    language: NamedAPIResource;
+  }
+
+  // Pokemon endpoint
   export interface PokemonAbility {
     is_hidden: boolean;
     slot: number;
@@ -75,5 +87,32 @@ export namespace PokeAPI {
     species: NamedAPIResource[];
     stats: PokemonStat[];
     types: PokemonType[];
+  }
+
+  // Type endpoint
+  export interface TypeRelations {
+    no_damage_to: NamedAPIResource[];
+    half_damage_to: NamedAPIResource[];
+    double_damage_to: NamedAPIResource[];
+    no_damage_from: NamedAPIResource[];
+    half_damage_from: NamedAPIResource[];
+    double_damage_from: NamedAPIResource[];
+  }
+
+  export interface TypePokemon {
+    slot: number;
+    pokemon: NamedAPIResource;
+  }
+
+  export interface Type {
+    id: number;
+    name: string;
+    damage_relations: TypeRelations;
+    game_indices: GenerationGameIndex[];
+    generation: NamedAPIResource[];
+    move_damage_class: NamedAPIResource[];
+    names: Name[];
+    pokemon: TypePokemon[];
+    moves: NamedAPIResource[];
   }
 }
