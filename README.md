@@ -1,8 +1,8 @@
 # Pokédex
 
-Pokédex to aplikacja webowa napisana w TypeScripcie w frameworku React. Jest to lista Pokemonów z możliwością filtrowania po typie, wyszukiwania po nazwie oraz obejrzenia detali o każdym z Pokemonów.
+Pokédex to aplikacja webowa napisana w TypeScripcie w bibliotece React. Jest to lista Pokemonów z możliwością filtrowania po typie, wyszukiwania po nazwie oraz obejrzenia detali o każdym z Pokemonów.
 
-Ten projekt powstał jako zadanie rekrutacyjne na staż letni w Allegro.
+Ten projekt powstał jako zadanie rekrutacyjne na staż letni w Allegro (2020).
 
 [Przejdź do Pokédexa!](https://alledex.netlify.app/) 
 
@@ -19,11 +19,3 @@ Utworzony zostanie katalog `pokedex` z projektem, przejdź do niego i zainstaluj
 
 Po instalacji modułów, aplikację można uruchomić za pomocą `yarn start` lub `npm start`.
 Powinna uruchomić się na porcie 3000.
-
-## TODO
-Czyli to co planuję dodać w najbliższym czasie:
-
-- przejście ze stanem na Reduxa lub inną alternatywę (tu także do zapytań asynchronicznych do API przydałby się Redux Thunk/Saga), bo trudno jest zachować dobrą wydajność korzystając z samego hooka useContext i przekazywania propsów
-- 100% stanu aplikacji ma być trzymane w URLu (strona i wybrane filtry), po przejściu na Reduxa powinno być to łatwiejsze
-- wybór ilości Pokemonów wyświetlanych na stronie w zależności od ilości wyświetlanych kolumn/szerokości ekranu
-- filtrowanie po kolorach, wyświetlanie ewolucji pokemonów, zmiana dostawcy zdjęć z PokeAPI na lepszego
