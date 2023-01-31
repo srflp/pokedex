@@ -31,6 +31,7 @@ const Shadow = React.memo(styled.div`
   background: #fffcfa;
 `);
 
+// eslint-disable-next-line jsx-a11y/alt-text
 const GridImage = styled(({ pixelated, ...props }) => <img {...props} />)<{
   pixelated: boolean;
 }>`

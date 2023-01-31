@@ -67,6 +67,7 @@ const PokemonView: React.FC = () => {
               style={{ margin: "0.5rem" }}
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
               // loader={<LoaderSmall style={{ maxHeight: "4rem" }} />}
+              alt={pokemonName}
             />
             <Flex>
               {pokemon.types.map((type) => (
