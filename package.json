@@ -2,6 +2,10 @@
   "name": "pokedex",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "*",
+    "npm": "*"
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.3.4",
     "@types/node": "^18.11.18",
