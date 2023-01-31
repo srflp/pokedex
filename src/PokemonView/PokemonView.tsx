@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import Img from "react-image";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
 import { InitialPokemon, getPokemon } from "./getPokemon";
 import { capitalize } from "../common/helpers";
 import { BrightSection, Flex } from "../components/BaseComponents";
 import Button from "../components/Button";
-import Loader, { LoaderSmall } from "../components/Loader";
+import Loader from "../components/Loader";
 import pokemonTypeColors from "../common/pokemonTypeColors";
 import Stat from "./Stat";
 
@@ -28,7 +27,7 @@ const PokemonView: React.FC = () => {
   const [pokemon, setPokemon] = useState<InitialPokemon>({
     ready: false,
   });
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (pokemonName) {
@@ -48,7 +47,7 @@ const PokemonView: React.FC = () => {
   return (
     <BrightSection>
       <Flex style={{ margin: "0.25rem" }}>
-        <Button onClick={history.goBack}>&lt; back</Button>
+        <Button onClick={() => navigate(-1)}>&lt; back</Button>
       </Flex>
       <Flex style={{ flexDirection: "column", alignItems: "center" }}>
         {!pokemon.ready ? (
@@ -64,10 +63,10 @@ const PokemonView: React.FC = () => {
             >
               {capitalize(pokemon.name)}
             </h1>
-            <Img
+            <img
               style={{ margin: "0.5rem" }}
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-              loader={<LoaderSmall style={{ maxHeight: "4rem" }} />}
+              // loader={<LoaderSmall style={{ maxHeight: "4rem" }} />}
             />
             <Flex>
               {pokemon.types.map((type) => (

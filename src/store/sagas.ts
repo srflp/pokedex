@@ -7,6 +7,7 @@ import { PokeAPI } from "../common/pokeApiTypings";
 
 function* fetchPokemon() {
   const url = `https://pokeapi.co/api/v2/pokemon/?limit=807`;
+  // @ts-ignore
   const results = yield fetch(url)
     .then((res) => res.json())
     .then((parsedRes) => parsedRes.results);
@@ -15,6 +16,7 @@ function* fetchPokemon() {
 
 function* fetchPokemonTypes() {
   const url = `https://pokeapi.co/api/v2/type`;
+  // @ts-ignore
   const results = yield fetch(url)
     .then((res) => res.json())
     .then((parsedRes) => parsedRes.results);
@@ -23,6 +25,7 @@ function* fetchPokemonTypes() {
 
 function* fetchTypesWithPokemonNames(action: PayloadAction<string>) {
   const url = `https://pokeapi.co/api/v2/type/${action.payload}`;
+  // @ts-ignore
   const results = yield fetch(url)
     .then((res) => res.json())
     .then((parsedRes: PokeAPI.Type) => parsedRes.pokemon);

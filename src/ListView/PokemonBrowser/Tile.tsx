@@ -1,8 +1,7 @@
 import React, { useCallback } from "react";
 import styled from "styled-components/macro";
 import { capitalize } from "../../common/helpers";
-import { useHistory } from "react-router-dom";
-import Img from "react-image";
+import { useNavigate } from "react-router-dom";
 import loaderSmall from "../../common/loader-small.png";
 
 const TileStyled = styled(Tile)`
@@ -32,7 +31,7 @@ const Shadow = React.memo(styled.div`
   background: #fffcfa;
 `);
 
-const GridImage = styled(({ pixelated, ...props }) => <Img {...props} />)<{
+const GridImage = styled(({ pixelated, ...props }) => <img {...props} />)<{
   pixelated: boolean;
 }>`
   position: absolute;
@@ -81,15 +80,15 @@ interface TileProps {
 }
 
 function Tile({ className, imgSrc, name, pokemonId }: TileProps) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const setDefaultImage = (e: React.SyntheticEvent) => {
     (e.target as HTMLImageElement).src =
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png";
   };
   const showPokemon = useCallback(() => {
     const path = `pokemon/${name}`;
-    history.push(path);
-  }, [name, history]);
+    navigate(path);
+  }, [name, navigate]);
 
   return (
     <TileContainer className={className}>
