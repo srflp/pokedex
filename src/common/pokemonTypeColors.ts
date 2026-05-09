@@ -1,5 +1,8 @@
-export const pokemonTypeColors: { none: string; [key: string]: string } = {
-  none: "#b4b4b4",
+import type { PokemonType } from "./pokemonTypes";
+
+export const DEFAULT_TYPE_COLOR = "#b4b4b4";
+
+export const pokemonTypeColors: Record<PokemonType, string> = {
   normal: "#A8A77A",
   fire: "#EE8130",
   water: "#6390F0",

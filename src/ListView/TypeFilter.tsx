@@ -2,7 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 import { capitalize } from "../common/helpers";
-import { pokemonTypeColors } from "../common/pokemonTypeColors";
+import {
+  DEFAULT_TYPE_COLOR,
+  pokemonTypeColors,
+} from "../common/pokemonTypeColors";
+import { type PokemonType } from "../common/pokemonTypes";
 import { FlexCentered, BrightSection } from "../components/BaseComponents";
 import { Loader } from "../components/Loader";
 import { fetchPokemonTypes } from "../api/pokemon";
@@ -77,12 +81,12 @@ export const TypeFilter: React.FC = () => {
     queryFn: fetchPokemonTypes,
   });
 
-  const setTypes = (next: string[]) =>
+  const setTypes = (next: PokemonType[]) =>
     navigate({
       search: (prev) => ({ ...prev, types: next, page: 1 }),
     });
 
-  const toggleType = (type: string) => {
+  const toggleType = (type: PokemonType) => {
     setTypes(
       selectedTypes.includes(type)
         ? selectedTypes.filter((t) => t !== type)
@@ -99,7 +103,7 @@ export const TypeFilter: React.FC = () => {
             <Button
               onClick={() => setTypes([])}
               $selected={selectedTypes.length === 0}
-              $color={pokemonTypeColors["none"]}
+              $color={DEFAULT_TYPE_COLOR}
             >
               All
             </Button>
@@ -109,7 +113,7 @@ export const TypeFilter: React.FC = () => {
                 value={type}
                 onClick={() => toggleType(type)}
                 $selected={selectedTypes.includes(type)}
-                $color={pokemonTypeColors[type] ?? pokemonTypeColors.none}
+                $color={pokemonTypeColors[type]}
               >
                 {capitalize(type)}
               </Button>

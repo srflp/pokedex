@@ -1,9 +1,10 @@
 import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
 import { ListView } from "../ListView/ListView";
+import { isPokemonType, type PokemonType } from "../common/pokemonTypes";
 
 export interface ListSearch {
   q: string;
-  types: string[];
+  types: PokemonType[];
   page: number;
 }
 
@@ -14,7 +15,9 @@ export const Route = createFileRoute("/")({
   validateSearch: (search: Record<string, unknown>): ListSearch => {
     const rawTypes = search.types;
     const types = Array.isArray(rawTypes)
-      ? rawTypes.filter((t): t is string => typeof t === "string")
+      ? rawTypes.filter(
+          (t): t is PokemonType => typeof t === "string" && isPokemonType(t),
+        )
       : [];
     const rawPage = search.page;
     const page =

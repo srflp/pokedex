@@ -1,4 +1,5 @@
 import type { PokeAPI } from "../common/pokeApiTypings";
+import { isPokemonType, type PokemonType } from "../common/pokemonTypes";
 
 export interface PokemonListItem {
   id: number;
@@ -26,16 +27,16 @@ export const fetchPokemonList = async (): Promise<PokemonListItem[]> => {
   return (json.results as PokeAPI.NamedAPIResource[]).map(parsePokemon);
 };
 
-export const fetchPokemonTypes = async (): Promise<string[]> => {
+export const fetchPokemonTypes = async (): Promise<PokemonType[]> => {
   const res = await fetch("https://pokeapi.co/api/v2/type");
   const json = await res.json();
   return (json.results as PokeAPI.NamedAPIResource[])
     .map((t) => t.name)
-    .filter((name) => name !== "shadow" && name !== "unknown");
+    .filter(isPokemonType);
 };
 
 export const fetchPokemonNamesByType = async (
-  type: string,
+  type: PokemonType,
 ): Promise<string[]> => {
   const res = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
   const json = (await res.json()) as PokeAPI.Type;
@@ -52,7 +53,7 @@ export interface PokemonStat {
 export interface PokemonDetail {
   id: number;
   name: string;
-  types: string[];
+  types: PokemonType[];
   stats: PokemonStat[];
   maxStatValue: number;
   height: string;
@@ -74,7 +75,8 @@ const parsePokemonDetail = (pokemon: PokeAPI.Pokemon): PokemonDetail => ({
   name: pokemon.name,
   types: pokemon.types
     .toSorted((a, b) => a.slot - b.slot)
-    .map((typeObj) => typeObj.type.name),
+    .map((typeObj) => typeObj.type.name)
+    .filter(isPokemonType),
   stats: pokemon.stats.map((statObj) => ({
     id: statObj.stat.name,
     emoji: statNameToEmoji[statObj.stat.name] ?? "",
