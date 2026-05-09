@@ -1,0 +1,38 @@
+name: bundle-size
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: bundle-size-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compressed-size:
+    name: gzip diff
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Compare compressed bundle size
+        uses: preactjs/compressed-size-action@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          pattern: "./dist/assets/**/*.{js,css}"
+          exclude: "{**/*.map,**/node_modules/**}"
+          build-script: "build"
+          install-script: "pnpm install --frozen-lockfile"
+          # Vite emits `name-HASH.ext` — strip the 8-char content hash so
+          # the same logical file compares stably across base and head.
+          strip-hash: "-(\\w{8})\\."
