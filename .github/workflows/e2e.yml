@@ -10,7 +10,11 @@ on:
 
 jobs:
   playwright:
+    name: chromium
     runs-on: ubuntu-latest
+    # Image tag must match @playwright/test version in package.json.
+    container:
+      image: mcr.microsoft.com/playwright:v1.59.1-noble
     timeout-minutes: 20
     steps:
       - name: Checkout
@@ -27,9 +31,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-
-      - name: Install Playwright browser
-        run: pnpm exec playwright install --with-deps chromium
 
       - name: Wait for Netlify deploy preview
         if: github.event_name == 'pull_request'
