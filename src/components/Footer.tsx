@@ -1,34 +1,22 @@
-import styled from "styled-components";
+import { footer, footerLink } from "./Footer.css";
 
-const FooterLink = styled.a`
-  text-decoration: none;
-  color: rgb(130, 130, 130);
-  &:hover {
-    color: rgb(90, 90, 90);
-    text-decoration: underline;
-  }
-`;
-
-const rawFooter = ({ className }: { className?: string }) => {
-  return (
-    <footer className={className}>
-      <p style={{ paddingBottom: "0.2rem" }}>
-        © 2020{" "}
-        <FooterLink href="https://github.com/srflp">Filip Sauer</FooterLink>
-      </p>
-      <p>
-        Created using{" "}
-        <FooterLink href="https://pokeapi.co/">PokéApi</FooterLink> and{" "}
-        <FooterLink href="https://reactjs.org/">React</FooterLink>
-      </p>
-    </footer>
-  );
-};
-
-export const Footer = styled(rawFooter)`
-  justify-content: center;
-  text-align: center;
-  font-size: 0.9rem;
-  margin: 1.5rem 1rem 1rem;
-  color: rgb(160, 160, 160);
-`;
+export const Footer = () => (
+  <footer className={footer}>
+    <p style={{ paddingBottom: "0.2rem" }}>
+      © 2020{" "}
+      <a className={footerLink} href="https://github.com/srflp">
+        Filip Sauer
+      </a>
+    </p>
+    <p>
+      Created using{" "}
+      <a className={footerLink} href="https://pokeapi.co/">
+        PokéApi
+      </a>{" "}
+      and{" "}
+      <a className={footerLink} href="https://reactjs.org/">
+        React
+      </a>
+    </p>
+  </footer>
+);

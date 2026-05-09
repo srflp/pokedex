@@ -1,26 +1,9 @@
 import { type RefObject, useRef } from "react";
-import styled from "styled-components";
 import { PageNumberInput } from "./PageNumberInput";
 import { Flex } from "../../../components/BaseComponents";
 import { Button } from "../../../components/Button";
 import { Route } from "../../../routes";
-
-const Nav = styled.nav`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const PageNumber = styled.p`
-  font-family: "VT323", monospace;
-  color: #33272a;
-  font-size: 1.25rem;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  cursor: text;
-  :hover {
-    color: black;
-  }
-`;
+import { nav, pageNumber } from "./PageNav.css";
 
 interface Props {
   pokemonBrowserRef: RefObject<HTMLElement | null>;
@@ -39,36 +22,37 @@ export const PageNav = ({ pokemonBrowserRef, totalPages, isTop }: Props) => {
   };
 
   return (
-    <Nav>
+    <nav className={nav}>
       <Flex>
-        <Button onClick={() => setPage(1)} $hide={currentPage === 1}>
+        <Button onClick={() => setPage(1)} hide={currentPage === 1}>
           &lt;&lt;
         </Button>
         <Button
           onClick={() => setPage(currentPage - 1)}
-          $hide={currentPage === 1}
+          hide={currentPage === 1}
         >
           &lt; prev
         </Button>
       </Flex>
-      <PageNumber onClick={() => inputRef?.current?.focus()}>
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
+      <p className={pageNumber} onClick={() => inputRef?.current?.focus()}>
         page <PageNumberInput inputRef={inputRef} totalPages={totalPages} />/
         {totalPages}
-      </PageNumber>
+      </p>
       <Flex>
         <Button
           onClick={() => setPage(currentPage + 1)}
-          $hide={currentPage === totalPages}
+          hide={currentPage === totalPages}
         >
           next &gt;
         </Button>
         <Button
           onClick={() => setPage(totalPages)}
-          $hide={currentPage === totalPages}
+          hide={currentPage === totalPages}
         >
           &gt;&gt;
         </Button>
       </Flex>
-    </Nav>
+    </nav>
   );
 };

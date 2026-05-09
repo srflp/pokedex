@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
 import { capitalize } from "../common/helpers";
 import {
   DEFAULT_TYPE_COLOR,
@@ -10,66 +10,12 @@ import { FlexCentered, BrightSection } from "../components/BaseComponents";
 import { Loader } from "../components/Loader";
 import { fetchPokemonTypes } from "../api/pokemon";
 import { Route } from "../routes";
-
-const FilterTitle = styled.h2`
-  font-weight: 500;
-  color: #594a4e;
-  font-size: 1rem;
-  padding: 0.5rem 0;
-  overflow: hidden;
-  text-align: center;
-
-  &:before,
-  &:after {
-    background-color: #c9c9c9;
-    content: "";
-    display: inline-block;
-    height: 1px;
-    position: relative;
-    vertical-align: middle;
-    width: 50%;
-  }
-  &:before {
-    right: 0.5rem;
-    margin-left: -50%;
-  }
-
-  &:after {
-    left: 0.5rem;
-    margin-right: -50%;
-  }
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: left;
-  flex-flow: row wrap;
-`;
-
-const Button = styled.button<{ $selected: boolean; $color: string }>`
-  font-size: 1rem;
-  font-weight: ${(props) => (props.$selected ? 500 : "normal")};
-  color: ${(props) => (props.$selected ? "white" : "#594a4e")};
-  background-color: ${(props) => (props.$selected ? props.$color : "white")};
-  border-radius: 0.5rem;
-  border: ${(props) => "1px solid " + props.$color};
-  flex-grow: ${(props) => (props.$selected ? "3" : "1")};
-  flex-basis: 0;
-  padding: 0.5rem 0.75rem;
-  margin: 0.25rem 0.25rem;
-  outline: none;
-  transition: all 0.05s ease-in-out;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  &:hover {
-    transform: scale(1.05);
-  }
-
-  &:active {
-    color: white;
-    background-color: ${(props) => props.$color};
-  }
-`;
+import {
+  buttonContainer,
+  filterButton,
+  filterColorVar,
+  filterTitle,
+} from "./TypeFilter.css";
 
 export const TypeFilter = () => {
   const navigate = Route.useNavigate();
@@ -97,31 +43,35 @@ export const TypeFilter = () => {
     <BrightSection>
       {pokemonTypes.length > 0 ? (
         <>
-          <FilterTitle>filter by type</FilterTitle>
-          <ButtonContainer>
-            <Button
+          <h2 className={filterTitle}>filter by type</h2>
+          <div className={buttonContainer}>
+            <button
+              className={filterButton({ selected: selectedTypes.length === 0 })}
+              style={assignInlineVars({ [filterColorVar]: DEFAULT_TYPE_COLOR })}
               onClick={() => setTypes([])}
-              $selected={selectedTypes.length === 0}
-              $color={DEFAULT_TYPE_COLOR}
             >
               All
-            </Button>
+            </button>
             {pokemonTypes.map((type) => (
-              <Button
+              <button
                 key={type}
                 value={type}
+                className={filterButton({
+                  selected: selectedTypes.includes(type),
+                })}
+                style={assignInlineVars({
+                  [filterColorVar]: pokemonTypeColors[type],
+                })}
                 onClick={() => toggleType(type)}
-                $selected={selectedTypes.includes(type)}
-                $color={pokemonTypeColors[type]}
               >
                 {capitalize(type)}
-              </Button>
+              </button>
             ))}
-          </ButtonContainer>
+          </div>
         </>
       ) : (
         <>
-          <FilterTitle>loading type filter</FilterTitle>
+          <h2 className={filterTitle}>loading type filter</h2>
           <FlexCentered>
             <Loader style={{ height: "4rem" }} />
           </FlexCentered>

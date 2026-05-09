@@ -6,22 +6,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import styled from "styled-components";
 import { Route } from "../../../routes";
-
-const PageNumberInputStyled = styled.input`
-  font-family: "VT323", monospace;
-  font-size: 1.5rem;
-  width: 2ch;
-  color: #33272a;
-  background-color: #faeee7;
-  border: none;
-  border-radius: 4px;
-  text-align: right;
-  appearance: none;
-  outline: none;
-  padding: 0;
-`;
+import { pageNumberInput } from "./PageNumberInput.css";
 
 interface Props {
   className?: string;
@@ -75,10 +61,10 @@ export const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
   };
 
   return (
-    <PageNumberInputStyled
+    <input
       ref={inputRef}
       type="text"
-      className={className}
+      className={[pageNumberInput, className].filter(Boolean).join(" ")}
       value={inputValue}
       onChange={handleChange}
       onFocus={handleFocus}

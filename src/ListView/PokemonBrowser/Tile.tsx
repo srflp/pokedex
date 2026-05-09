@@ -1,70 +1,9 @@
 import type { SyntheticEvent } from "react";
-import styled from "styled-components";
 import { capitalize } from "../../common/helpers";
 import { useNavigate } from "@tanstack/react-router";
-
-export const Tile = styled(TileBase)`
-  height: 100%;
-  width: 100%;
-
-  &:before {
-    content: " ";
-    display: block;
-    width: 100%;
-  }
-`;
-
-const TileContainer = styled.div`
-  position: relative;
-  margin: auto;
-`;
-
-const Shadow = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 40%;
-  width: 60%;
-  padding-top: 60%;
-  background: #fffcfa;
-`;
-
-const GridImage = styled.img<{ $pixelated: boolean }>`
-  position: absolute;
-  height: 100%;
-  image-rendering: ${(props) => (props.$pixelated ? "crisp-edges" : "smooth")};
-  -ms-interpolation-mode: ${(props) =>
-    props.$pixelated ? "nearest-neighbor" : "smooth"};
-  image-rendering: ${(props) =>
-    props.$pixelated ? "-webkit-optimize-contrast" : "smooth"};
-  image-rendering: ${(props) =>
-    props.$pixelated ? "-moz-crisp-edges" : "smooth"};
-  image-rendering: ${(props) => (props.$pixelated ? "-o-pixelated" : "smooth")};
-  image-rendering: ${(props) => (props.$pixelated ? "pixelated" : "smooth")};
-  z-index: 1;
-  transition: all 90ms ease-in-out;
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-
-const Label = styled.div`
-  font-family: "VT323", monospace;
-  font-size: 1.3em;
-  white-space: nowrap;
-  position: absolute;
-  left: 50%;
-  top: 100%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  color: #33272a;
-  background-color: rgba(255, 255, 254, 0.7); //rgba(255, 255, 255, 0.8);
-  border-radius: 5px;
-`;
+import { gridImage, label, shadow, tile } from "./Tile.css";
 
 interface TileProps {
-  className?: string;
   imgSrc: string;
   name: string;
   pokemonId: number;
@@ -75,7 +14,7 @@ const setDefaultImage = (e: SyntheticEvent) => {
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png";
 };
 
-function TileBase({ className, imgSrc, name, pokemonId }: TileProps) {
+export function Tile({ imgSrc, name, pokemonId }: TileProps) {
   const navigate = useNavigate();
   const showPokemon = () => {
     navigate({
@@ -85,17 +24,18 @@ function TileBase({ className, imgSrc, name, pokemonId }: TileProps) {
   };
 
   return (
-    <TileContainer className={className}>
-      <Label>{capitalize(name)}</Label>
-      <GridImage
+    <div className={tile}>
+      <div className={label}>{capitalize(name)}</div>
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
+      <img
+        className={gridImage({ pixelated: pokemonId < 722 })}
         src={imgSrc}
         alt={capitalize(name) + " - a pokemon"}
         onError={setDefaultImage}
         id={name}
         onClick={() => showPokemon()}
-        $pixelated={pokemonId < 722}
       />
-      <Shadow />
-    </TileContainer>
+      <div className={shadow} />
+    </div>
   );
 }

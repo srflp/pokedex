@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
-import styled from "styled-components";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
 import { Route } from "../routes/pokemon.$pokemonName";
 import { fetchPokemonDetail } from "../api/pokemon";
 import { capitalize } from "../common/helpers";
@@ -12,21 +12,17 @@ import {
   DEFAULT_TYPE_COLOR,
   pokemonTypeColors,
 } from "../common/pokemonTypeColors";
-import { type PokemonType } from "../common/pokemonTypes";
 import { Stat } from "./Stat";
-
-const TypeBadge = styled.div<{ $type: PokemonType }>`
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: white;
-  border-radius: 5px;
-  background-color: ${(props) => pokemonTypeColors[props.$type]};
-  padding: 0.5rem;
-  margin-right: 0.25rem;
-  &:last-child {
-    margin-right: 0;
-  }
-`;
+import {
+  backRow,
+  heightText,
+  mainColumn,
+  pageTitle,
+  spriteImage,
+  statsContainer,
+  typeBadge,
+  typeColorVar,
+} from "./PokemonView.css";
 
 export const PokemonView = () => {
   const { pokemonName } = Route.useParams();
@@ -46,43 +42,34 @@ export const PokemonView = () => {
 
   return (
     <BrightSection>
-      <Flex style={{ margin: "0.25rem" }}>
+      <Flex className={backRow}>
         <Button onClick={() => router.history.back()}>&lt; back</Button>
       </Flex>
-      <Flex style={{ flexDirection: "column", alignItems: "center" }}>
+      <Flex className={mainColumn}>
         {!pokemon ? (
           <Loader style={{ maxHeight: "4rem" }} />
         ) : (
           <>
-            <h1
-              style={{
-                fontSize: "2rem",
-                margin: "0.5rem",
-                fontFamily: '"VT323", monospace',
-              }}
-            >
-              {capitalize(pokemon.name)}
-            </h1>
+            <h1 className={pageTitle}>{capitalize(pokemon.name)}</h1>
             <img
-              style={{ margin: "0.5rem" }}
+              className={spriteImage}
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
               alt={pokemonName}
             />
             <Flex>
               {pokemon.types.map((type) => (
-                <TypeBadge key={type} $type={type}>
+                <div
+                  key={type}
+                  className={typeBadge}
+                  style={assignInlineVars({
+                    [typeColorVar]: pokemonTypeColors[type],
+                  })}
+                >
                   {capitalize(type)}
-                </TypeBadge>
+                </div>
               ))}
             </Flex>
-            <div
-              style={{
-                width: "100%",
-                maxWidth: "400px",
-                padding: "0.7rem",
-                boxSizing: "border-box",
-              }}
-            >
+            <div className={statsContainer}>
               {pokemon.stats.map((stat) => (
                 <Stat
                   key={stat.id}
@@ -97,7 +84,7 @@ export const PokemonView = () => {
               ))}
             </div>
             <div>
-              <p style={{ marginBottom: "1.2rem" }}>
+              <p className={heightText}>
                 Height:{" "}
                 <span role="img" aria-label={"Height"}>
                   ↕️

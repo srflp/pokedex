@@ -1,31 +1,7 @@
 import { type ChangeEvent } from "react";
-import styled from "styled-components";
 import { BrightSection } from "../components/BaseComponents";
 import { Route } from "../routes";
-
-const SearchInput = styled.input`
-  font-size: 1.7rem;
-  background-color: transparent;
-  width: 100%;
-  border: none;
-  text-align: center;
-  -moz-appearance: textfield;
-  -webkit-appearance: none;
-  outline: none;
-  padding: 0.5rem 0;
-  ::-webkit-input-placeholder {
-    color: #8b747a;
-  }
-  ::-moz-placeholder {
-    color: #8b747a;
-  }
-  :-ms-input-placeholder {
-    color: #8b747a;
-  }
-  :-moz-placeholder {
-    color: #8b747a;
-  }
-`;
+import { searchInput } from "./Search.css";
 
 export const Search = () => {
   const navigate = Route.useNavigate();
@@ -41,7 +17,8 @@ export const Search = () => {
 
   return (
     <BrightSection>
-      <SearchInput
+      <input
+        className={searchInput}
         type="search"
         placeholder={" 🔍 search"}
         value={q}

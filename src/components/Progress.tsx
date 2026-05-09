@@ -1,39 +1,35 @@
-import styled from "styled-components";
+import type { HTMLAttributes } from "react";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { backgroundVar, colorVar, stat, statBar } from "./Progress.css";
 
-const Stat = styled.div<{ $color: string; $background?: string }>`
-  background-color: ${({ $background }) => $background || "white"};
-  border-radius: 4px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) inset;
-  width: 100%;
-  height: 1.5rem;
-
-  & > span {
-    background-color: ${(props) => props.$color};
-    border-radius: 4px;
-    display: block;
-    text-indent: -9999px;
-    height: 100%;
-  }
-`;
-
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   value: number;
   max: number;
   color: string;
   background?: string;
-  [key: string]: any;
 }
 
-export const Progress = ({ value, max, color, background, ...rest }: Props) => {
-  return (
-    <Stat $color={color} $background={background} {...rest}>
-      <span
-        style={{
-          width: (value / max) * 100 + "%",
-        }}
-      >
-        {value}
-      </span>
-    </Stat>
-  );
-};
+export const Progress = ({
+  value,
+  max,
+  color,
+  background,
+  style: styleProp,
+  ...rest
+}: Props) => (
+  <div
+    className={stat}
+    style={{
+      ...assignInlineVars({
+        [colorVar]: color,
+        ...(background ? { [backgroundVar]: background } : {}),
+      }),
+      ...styleProp,
+    }}
+    {...rest}
+  >
+    <span className={statBar} style={{ width: (value / max) * 100 + "%" }}>
+      {value}
+    </span>
+  </div>
+);

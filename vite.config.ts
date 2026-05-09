@@ -2,13 +2,18 @@ import { defineConfig } from "vite";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import babel from "@rolldown/plugin-babel";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
 export default defineConfig({
   plugins: [
     tanstackRouter({ target: "react", autoCodeSplitting: true }),
+    vanillaExtractPlugin(),
     react(),
     babel({ presets: [reactCompilerPreset()] }),
   ],
-  server: { port: 3000 },
+  server: {
+    port: 3000,
+    watch: { ignored: ["**/playwright-report/**", "**/test-results/**"] },
+  },
   preview: { port: 3000 },
 });
