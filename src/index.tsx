@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components/macro";
+import { createGlobalStyle } from "styled-components";
 import { Provider } from "react-redux";
 import App from "./App";
 import store from "./configureStore";

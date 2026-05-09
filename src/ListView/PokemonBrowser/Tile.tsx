@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { capitalize } from "../../common/helpers";
 import { useNavigate } from "react-router-dom";
 import loaderSmall from "../../common/loader-small.png";

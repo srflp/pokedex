@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { BrightSection } from "../components/BaseComponents";
 import { useDispatch } from "react-redux";
 import { search } from "../store/filter/searchSlice";
