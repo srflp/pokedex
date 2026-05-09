@@ -25,8 +25,7 @@ It should start on port 3000.
 
 ## Changelog
 
-- **2026-05-09** — Migrated the build tool from Create React App (`react-scripts`) to Vite. Dev server and production build are now powered by Vite; `styled-components/macro` imports were replaced with plain `styled-components` (display names preserved via `babel-plugin-styled-components` in `vite.config.ts`).
-- **2026-05-09** — Pinned Node.js to v24, switched tooling to pnpm, and added a Playwright end-to-end smoke suite running on each PR against the Netlify deploy preview and weekly against production.
+- **2026-05-09** — Modernized the toolchain end-to-end: migrated from Create React App to Vite; replaced Redux Toolkit + Redux Saga with TanStack Query and React Router with file-based TanStack Router (filter/search/page state moved to typed URL params); type-checking moved to TypeScript Native Preview (`tsgo`). Bumped React and `react-dom` to v19 with the React Compiler enabled, `styled-components` to v6, and Prettier to v3. Pinned Node 24, switched to pnpm, and added Playwright e2e + Prettier `format:check` GitHub Actions running on every PR.
 - **2023-01-31** — Migrated to pnpm and bumped all dependencies.
 - **2020-06-19** — Migrated state management to Redux and Redux Saga.
 - **2020-04-16** — Initial release.

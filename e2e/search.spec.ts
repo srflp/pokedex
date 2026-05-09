@@ -4,13 +4,13 @@ test("search filters tiles to the matching pokemon", async ({ page }) => {
   await page.goto("/");
 
   await expect(
-    page.getByRole("heading", { name: "Pokédex", level: 1 })
+    page.getByRole("heading", { name: "Pokédex", level: 1 }),
   ).toBeVisible({ timeout: 30_000 });
 
   // Wait for tiles to load (Bulbasaur is on the default first page).
-  await expect(
-    page.getByAltText("Bulbasaur - a pokemon")
-  ).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByAltText("Bulbasaur - a pokemon")).toBeVisible({
+    timeout: 30_000,
+  });
 
   await page.getByRole("searchbox").fill("pikachu");
 

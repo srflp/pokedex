@@ -1,4 +1,4 @@
-export default {
+export const pokemonTypeColors: { [key: string]: string } = {
   none: "#b4b4b4",
   normal: "#A8A77A",
   fire: "#EE8130",
@@ -18,4 +18,4 @@ export default {
   dark: "#705746",
   steel: "#B7B7CE",
   fairy: "#D685AD",
-} as { [key: string]: string };
+};

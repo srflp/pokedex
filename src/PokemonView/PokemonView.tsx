@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "@tanstack/react-router";
 import styled from "styled-components";
-import { InitialPokemon, getPokemon } from "./getPokemon";
+import { Route } from "../routes/pokemon.$pokemonName";
+import { fetchPokemonDetail } from "../api/pokemon";
 import { capitalize } from "../common/helpers";
 import { BrightSection, Flex } from "../components/BaseComponents";
-import Button from "../components/Button";
-import Loader from "../components/Loader";
-import pokemonTypeColors from "../common/pokemonTypeColors";
-import Stat from "./Stat";
+import { Button } from "../components/Button";
+import { Loader } from "../components/Loader";
+import { pokemonTypeColors } from "../common/pokemonTypeColors";
+import { Stat } from "./Stat";
 
-const TypeBadge = styled.div<{ type: string }>`
+const TypeBadge = styled.div<{ $type: string }>`
   font-size: 0.9rem;
   font-weight: 500;
   color: white;
   border-radius: 5px;
-  background-color: ${(props) => pokemonTypeColors[props.type]};
+  background-color: ${(props) => pokemonTypeColors[props.$type]};
   padding: 0.5rem;
   margin-right: 0.25rem;
   &:last-child {
@@ -22,12 +24,15 @@ const TypeBadge = styled.div<{ type: string }>`
   }
 `;
 
-const PokemonView: React.FC = () => {
-  const { pokemonName } = useParams();
-  const [pokemon, setPokemon] = useState<InitialPokemon>({
-    ready: false,
+export const PokemonView: React.FC = () => {
+  const { pokemonName } = Route.useParams();
+  const router = useRouter();
+
+  const { data: pokemon } = useQuery({
+    queryKey: ["pokemon-detail", pokemonName],
+    queryFn: () => fetchPokemonDetail(pokemonName),
+    enabled: Boolean(pokemonName),
   });
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (pokemonName) {
@@ -35,22 +40,13 @@ const PokemonView: React.FC = () => {
     }
   }, [pokemonName]);
 
-  useEffect(() => {
-    if (pokemonName) {
-      (async () => {
-        const pokemon = await getPokemon(pokemonName);
-        setPokemon(pokemon);
-      })();
-    }
-  }, [pokemonName]);
-
   return (
     <BrightSection>
       <Flex style={{ margin: "0.25rem" }}>
-        <Button onClick={() => navigate(-1)}>&lt; back</Button>
+        <Button onClick={() => router.history.back()}>&lt; back</Button>
       </Flex>
       <Flex style={{ flexDirection: "column", alignItems: "center" }}>
-        {!pokemon.ready ? (
+        {!pokemon ? (
           <Loader style={{ maxHeight: "4rem" }} />
         ) : (
           <>
@@ -66,12 +62,11 @@ const PokemonView: React.FC = () => {
             <img
               style={{ margin: "0.5rem" }}
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-              // loader={<LoaderSmall style={{ maxHeight: "4rem" }} />}
               alt={pokemonName}
             />
             <Flex>
               {pokemon.types.map((type) => (
-                <TypeBadge key={type} type={type}>
+                <TypeBadge key={type} $type={type}>
                   {capitalize(type)}
                 </TypeBadge>
               ))}
@@ -108,5 +103,3 @@ const PokemonView: React.FC = () => {
     </BrightSection>
   );
 };
-
-export default PokemonView;

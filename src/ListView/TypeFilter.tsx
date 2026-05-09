@@ -1,14 +1,12 @@
 import React from "react";
-import { capitalize } from "../common/helpers";
 import styled from "styled-components";
-import pokemonTypeColors from "../common/pokemonTypeColors";
+import { useQuery } from "@tanstack/react-query";
+import { capitalize } from "../common/helpers";
+import { pokemonTypeColors } from "../common/pokemonTypeColors";
 import { FlexCentered, BrightSection } from "../components/BaseComponents";
-import Loader from "../components/Loader";
-import { useTypedSelector } from "../configureStore";
-import { selectedTypesActions } from "../store/filter/selectedTypesSlice";
-import { useDispatch } from "react-redux";
-import { typesWithPokemonNamesActions } from "../store/pokemon/typesWithPokemonNames";
-import { page } from "../store/page/pageSlice";
+import { Loader } from "../components/Loader";
+import { fetchPokemonTypes } from "../api/pokemon";
+import { Route } from "../routes";
 
 const FilterTitle = styled.h2`
   font-weight: 500;
@@ -46,14 +44,14 @@ const ButtonContainer = styled.div`
   flex-flow: row wrap;
 `;
 
-const Button = styled.button<{ selected: boolean }>`
+const Button = styled.button<{ $selected: boolean; $color: string }>`
   font-size: 1rem;
-  font-weight: ${(props) => (props.selected ? 500 : "normal")};
-  color: ${(props) => (props.selected ? "white" : "#594a4e")};
-  background-color: ${(props) => (props.selected ? props.color : "white")};
+  font-weight: ${(props) => (props.$selected ? 500 : "normal")};
+  color: ${(props) => (props.$selected ? "white" : "#594a4e")};
+  background-color: ${(props) => (props.$selected ? props.$color : "white")};
   border-radius: 0.5rem;
-  border: ${(props) => "1px solid " + props.color};
-  flex-grow: ${(props) => (props.selected ? "3" : "1")};
+  border: ${(props) => "1px solid " + props.$color};
+  flex-grow: ${(props) => (props.$selected ? "3" : "1")};
   flex-basis: 0;
   padding: 0.5rem 0.75rem;
   margin: 0.25rem 0.25rem;
@@ -66,19 +64,31 @@ const Button = styled.button<{ selected: boolean }>`
 
   &:active {
     color: white;
-    background-color: ${(props) => props.color};
+    background-color: ${(props) => props.$color};
   }
 `;
 
-const TypeFilter: React.FC = () => {
-  const dispatch = useDispatch();
-  const pokemonTypes = useTypedSelector((state) => state.pokemon.types);
-  const pokemonTypesWithNames = useTypedSelector(
-    (state) => state.pokemon.typesWithPokemonNames
-  );
-  const selectedPokemonTypes = useTypedSelector(
-    (state) => state.filter.selectedTypes
-  );
+export const TypeFilter: React.FC = () => {
+  const navigate = Route.useNavigate();
+  const { types: selectedTypes } = Route.useSearch();
+
+  const { data: pokemonTypes = [] } = useQuery({
+    queryKey: ["pokemon-types"],
+    queryFn: fetchPokemonTypes,
+  });
+
+  const setTypes = (next: string[]) =>
+    navigate({
+      search: (prev) => ({ ...prev, types: next, page: 1 }),
+    });
+
+  const toggleType = (type: string) => {
+    setTypes(
+      selectedTypes.includes(type)
+        ? selectedTypes.filter((t) => t !== type)
+        : [...selectedTypes, type],
+    );
+  };
 
   return (
     <BrightSection>
@@ -87,12 +97,9 @@ const TypeFilter: React.FC = () => {
           <FilterTitle>filter by type</FilterTitle>
           <ButtonContainer>
             <Button
-              onClick={() => {
-                dispatch(selectedTypesActions.clear());
-                dispatch(page.setCurrent(1));
-              }}
-              selected={selectedPokemonTypes.length === 0}
-              color={pokemonTypeColors["none"]}
+              onClick={() => setTypes([])}
+              $selected={selectedTypes.length === 0}
+              $color={pokemonTypeColors["none"]}
             >
               All
             </Button>
@@ -100,15 +107,9 @@ const TypeFilter: React.FC = () => {
               <Button
                 key={type}
                 value={type}
-                onClick={() => {
-                  if (!pokemonTypesWithNames.hasOwnProperty(type)) {
-                    dispatch(typesWithPokemonNamesActions.fetchRequested(type));
-                  }
-                  dispatch(selectedTypesActions.toggle(type));
-                  dispatch(page.setCurrent(1));
-                }}
-                selected={selectedPokemonTypes.includes(type)}
-                color={pokemonTypeColors[type]}
+                onClick={() => toggleType(type)}
+                $selected={selectedTypes.includes(type)}
+                $color={pokemonTypeColors[type]}
               >
                 {capitalize(type)}
               </Button>
@@ -126,5 +127,3 @@ const TypeFilter: React.FC = () => {
     </BrightSection>
   );
 };
-
-export default TypeFilter;

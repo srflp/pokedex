@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { BrightSection } from "../components/BaseComponents";
-import { useDispatch } from "react-redux";
-import { search } from "../store/filter/searchSlice";
-import { page } from "../store/page/pageSlice";
+import { Route } from "../routes";
 
 const SearchInput = styled.input`
   font-size: 1.7rem;
@@ -29,12 +27,16 @@ const SearchInput = styled.input`
   }
 `;
 
-const Search: React.FC = () => {
-  const dispatch = useDispatch();
+export const Search: React.FC = () => {
+  const navigate = Route.useNavigate();
+  const { q } = Route.useSearch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(search.set(e.target.value.toLowerCase()));
-    dispatch(page.setCurrent(1));
+    const value = e.target.value.toLowerCase();
+    navigate({
+      search: (prev) => ({ ...prev, q: value, page: 1 }),
+      replace: true,
+    });
   };
 
   return (
@@ -42,6 +44,7 @@ const Search: React.FC = () => {
       <SearchInput
         type="search"
         placeholder={" 🔍 search"}
+        value={q}
         onFocus={(e) => {
           const target = e.target;
           target.placeholder = " 🔍      ";
@@ -52,5 +55,3 @@ const Search: React.FC = () => {
     </BrightSection>
   );
 };
-
-export default Search;

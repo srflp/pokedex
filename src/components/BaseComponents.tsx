@@ -12,8 +12,8 @@ export const Row = styled.div`
   //background-color: #61dafb;
 `;
 
-export const Col = styled("div")<{ size?: number }>`
-  flex: ${(props) => props.size};
+export const Col = styled("div")<{ $size?: number }>`
+  flex: ${(props) => props.$size};
 `;
 
 export const Grid = styled.div`
