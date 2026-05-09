@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import TypeFilter from "./TypeFilter";
-import Search from "./Search";
-import PokemonBrowser from "./PokemonBrowser/PokemonBrowser";
+import { TypeFilter } from "./TypeFilter";
+import { Search } from "./Search";
+import { PokemonBrowser } from "./PokemonBrowser/PokemonBrowser";
 import { Route } from "../routes";
 import {
   fetchPokemonList,
@@ -36,7 +36,7 @@ const filterPokemons = (
   return result;
 };
 
-const ListView: React.FC = () => {
+export const ListView: React.FC = () => {
   const { q, types } = Route.useSearch();
 
   const { data: pokemons = [] } = useQuery({
@@ -79,5 +79,3 @@ const ListView: React.FC = () => {
     </>
   );
 };
-
-export default ListView;

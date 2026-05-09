@@ -6,10 +6,10 @@ import { Route } from "../routes/pokemon.$pokemonName";
 import { fetchPokemonDetail } from "../api/pokemon";
 import { capitalize } from "../common/helpers";
 import { BrightSection, Flex } from "../components/BaseComponents";
-import Button from "../components/Button";
-import Loader from "../components/Loader";
-import pokemonTypeColors from "../common/pokemonTypeColors";
-import Stat from "./Stat";
+import { Button } from "../components/Button";
+import { Loader } from "../components/Loader";
+import { pokemonTypeColors } from "../common/pokemonTypeColors";
+import { Stat } from "./Stat";
 
 const TypeBadge = styled.div<{ type: string }>`
   font-size: 0.9rem;
@@ -24,7 +24,7 @@ const TypeBadge = styled.div<{ type: string }>`
   }
 `;
 
-const PokemonView: React.FC = () => {
+export const PokemonView: React.FC = () => {
   const { pokemonName } = Route.useParams();
   const router = useRouter();
 
@@ -103,5 +103,3 @@ const PokemonView: React.FC = () => {
     </BrightSection>
   );
 };
-
-export default PokemonView;

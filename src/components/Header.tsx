@@ -14,12 +14,10 @@ const HeaderText = styled.h1`
   font-size: 3rem;
 `;
 
-function Header() {
+export function Header() {
   return (
     <HeaderContainer>
       <HeaderText>Pokédex</HeaderText>
     </HeaderContainer>
   );
 }
-
-export default React.memo(Header);

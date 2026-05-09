@@ -9,8 +9,6 @@ type UnknownProps = {
 export const LoaderSmall: React.FC<UnknownProps> = (props) => (
   <img src={loaderSmall} alt="Loading..." {...props} />
 );
-const Loader: React.FC<UnknownProps> = (props) => (
+export const Loader: React.FC<UnknownProps> = (props) => (
   <img src={loader} alt="Loading..." {...props} />
 );
-
-export default Loader;

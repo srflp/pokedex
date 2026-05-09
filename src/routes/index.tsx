@@ -1,8 +1,5 @@
-import {
-  createFileRoute,
-  stripSearchParams,
-} from "@tanstack/react-router";
-import ListView from "../ListView/ListView";
+import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
+import { ListView } from "../ListView/ListView";
 
 export interface ListSearch {
   q: string;

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrightSection } from "../../components/BaseComponents";
-import PageNav from "./PageNav/PageNav";
-import PokemonGrid from "./PokemonGrid";
+import { PageNav } from "./PageNav/PageNav";
+import { PokemonGrid } from "./PokemonGrid";
 import { PokemonListItem } from "../../api/pokemon";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
   perPage: number;
 }
 
-const PokemonBrowser: React.FC<Props> = ({
+export const PokemonBrowser: React.FC<Props> = ({
   filteredPokemons,
   totalPages,
   perPage,
@@ -28,16 +28,8 @@ const PokemonBrowser: React.FC<Props> = ({
         totalPages={totalPages}
         isTop={true}
       />
-      <PokemonGrid
-        filteredPokemons={filteredPokemons}
-        perPage={perPage}
-      />
-      <PageNav
-        pokemonBrowserRef={pokemonBrowserRef}
-        totalPages={totalPages}
-      />
+      <PokemonGrid filteredPokemons={filteredPokemons} perPage={perPage} />
+      <PageNav pokemonBrowserRef={pokemonBrowserRef} totalPages={totalPages} />
     </BrightSection>
   );
 };
-
-export default PokemonBrowser;

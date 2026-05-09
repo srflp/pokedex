@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Button = styled.button<{ hide?: boolean }>`
+export const Button = styled.button<{ hide?: boolean }>`
   font-family: "VT323", monospace;
   color: #33272a;
   background-color: rgb(235, 235, 235);
@@ -23,5 +23,3 @@ const Button = styled.button<{ hide?: boolean }>`
     margin-right: 0.25rem;
   }
 `;
-
-export default Button;

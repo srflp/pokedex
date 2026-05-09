@@ -27,7 +27,7 @@ const SearchInput = styled.input`
   }
 `;
 
-const Search: React.FC = () => {
+export const Search: React.FC = () => {
   const navigate = Route.useNavigate();
   const { q } = Route.useSearch();
 
@@ -55,5 +55,3 @@ const Search: React.FC = () => {
     </BrightSection>
   );
 };
-
-export default Search;

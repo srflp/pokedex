@@ -4,7 +4,7 @@ import { capitalize } from "../../common/helpers";
 import { useNavigate } from "@tanstack/react-router";
 import loaderSmall from "../../common/loader-small.png";
 
-const TileStyled = styled(Tile)`
+export const Tile = styled(TileBase)`
   height: 100%;
   width: 100%;
 
@@ -80,7 +80,7 @@ interface TileProps {
   pokemonId: number;
 }
 
-function Tile({ className, imgSrc, name, pokemonId }: TileProps) {
+function TileBase({ className, imgSrc, name, pokemonId }: TileProps) {
   const navigate = useNavigate();
   const setDefaultImage = (e: React.SyntheticEvent) => {
     (e.target as HTMLImageElement).src =
@@ -109,5 +109,3 @@ function Tile({ className, imgSrc, name, pokemonId }: TileProps) {
     </TileContainer>
   );
 }
-
-export default TileStyled;

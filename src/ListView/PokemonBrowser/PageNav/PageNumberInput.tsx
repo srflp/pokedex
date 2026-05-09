@@ -22,7 +22,7 @@ interface Props {
   totalPages: number;
 }
 
-const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
+export const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
   const navigate = Route.useNavigate();
   const { page: currentPage } = Route.useSearch();
   const [inputValue, setInputValue] = useState(currentPage.toString());
@@ -32,8 +32,7 @@ const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
   }, [currentPage]);
 
   const setPage = useCallback(
-    (next: number) =>
-      navigate({ search: (prev) => ({ ...prev, page: next }) }),
+    (next: number) => navigate({ search: (prev) => ({ ...prev, page: next }) }),
     [navigate]
   );
 
@@ -86,5 +85,3 @@ const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
     />
   );
 };
-
-export default PageNumberInput;

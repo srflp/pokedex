@@ -1,5 +1,5 @@
 import React from "react";
-import Progress from "../components/Progress";
+import { Progress } from "../components/Progress";
 import { PokemonStat } from "../api/pokemon";
 
 interface Props extends PokemonStat {
@@ -7,7 +7,7 @@ interface Props extends PokemonStat {
   color: string;
 }
 
-const Stat: React.FC<Props> = ({ emoji, name, value, max, color }) => (
+export const Stat: React.FC<Props> = ({ emoji, name, value, max, color }) => (
   <>
     <p style={{ marginBottom: "0.3rem" }}>
       {name}
@@ -24,5 +24,3 @@ const Stat: React.FC<Props> = ({ emoji, name, value, max, color }) => (
     />
   </>
 );
-
-export default Stat;

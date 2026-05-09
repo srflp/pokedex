@@ -25,7 +25,7 @@ interface Props {
   [key: string]: any;
 }
 
-const Progress: React.FC<Props> = ({
+export const Progress: React.FC<Props> = ({
   value,
   max,
   color,
@@ -44,5 +44,3 @@ const Progress: React.FC<Props> = ({
     </Stat>
   );
 };
-
-export default Progress;

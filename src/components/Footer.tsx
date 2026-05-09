@@ -26,12 +26,10 @@ const rawFooter: React.FC<{ className?: string }> = ({ className }) => {
   );
 };
 
-const Footer = styled(rawFooter)`
+export const Footer = styled(rawFooter)`
   justify-content: center;
   text-align: center;
   font-size: 0.9rem;
   margin: 1.5rem 1rem 1rem;
   color: rgb(160, 160, 160);
 `;
-
-export default Footer;

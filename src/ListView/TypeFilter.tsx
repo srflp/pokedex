@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 import { capitalize } from "../common/helpers";
-import pokemonTypeColors from "../common/pokemonTypeColors";
+import { pokemonTypeColors } from "../common/pokemonTypeColors";
 import { FlexCentered, BrightSection } from "../components/BaseComponents";
-import Loader from "../components/Loader";
+import { Loader } from "../components/Loader";
 import { fetchPokemonTypes } from "../api/pokemon";
 import { Route } from "../routes";
 
@@ -68,7 +68,7 @@ const Button = styled.button<{ selected: boolean }>`
   }
 `;
 
-const TypeFilter: React.FC = () => {
+export const TypeFilter: React.FC = () => {
   const navigate = Route.useNavigate();
   const { types: selectedTypes } = Route.useSearch();
 
@@ -127,5 +127,3 @@ const TypeFilter: React.FC = () => {
     </BrightSection>
   );
 };
-
-export default TypeFilter;
