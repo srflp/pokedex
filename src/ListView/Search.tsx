@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "@tanstack/react-router";
 import { BrightSection } from "../components/BaseComponents";
-import { indexRoute } from "../router";
+import { Route } from "../routes";
 
 const SearchInput = styled.input`
   font-size: 1.7rem;
@@ -29,8 +28,8 @@ const SearchInput = styled.input`
 `;
 
 const Search: React.FC = () => {
-  const navigate = useNavigate({ from: indexRoute.fullPath });
-  const { q } = indexRoute.useSearch();
+  const navigate = Route.useNavigate();
+  const { q } = Route.useSearch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toLowerCase();

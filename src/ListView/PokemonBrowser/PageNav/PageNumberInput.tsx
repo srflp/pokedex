@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "@tanstack/react-router";
-import { indexRoute } from "../../../router";
+import { Route } from "../../../routes";
 
 const PageNumberInputStyled = styled.input`
   font-family: "VT323", monospace;
@@ -24,8 +23,8 @@ interface Props {
 }
 
 const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
-  const navigate = useNavigate({ from: indexRoute.fullPath });
-  const { page: currentPage } = indexRoute.useSearch();
+  const navigate = Route.useNavigate();
+  const { page: currentPage } = Route.useSearch();
   const [inputValue, setInputValue] = useState(currentPage.toString());
 
   useEffect(() => {

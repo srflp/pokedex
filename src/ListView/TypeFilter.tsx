@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "@tanstack/react-router";
 import { capitalize } from "../common/helpers";
 import pokemonTypeColors from "../common/pokemonTypeColors";
 import { FlexCentered, BrightSection } from "../components/BaseComponents";
 import Loader from "../components/Loader";
 import { fetchPokemonTypes } from "../api/pokemon";
-import { indexRoute } from "../router";
+import { Route } from "../routes";
 
 const FilterTitle = styled.h2`
   font-weight: 500;
@@ -70,8 +69,8 @@ const Button = styled.button<{ selected: boolean }>`
 `;
 
 const TypeFilter: React.FC = () => {
-  const navigate = useNavigate({ from: indexRoute.fullPath });
-  const { types: selectedTypes } = indexRoute.useSearch();
+  const navigate = Route.useNavigate();
+  const { types: selectedTypes } = Route.useSearch();
 
   const { data: pokemonTypes = [] } = useQuery({
     queryKey: ["pokemon-types"],

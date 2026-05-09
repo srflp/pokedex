@@ -1,8 +1,8 @@
 import React from "react";
 import Tile from "./Tile";
 import { Grid } from "../../components/BaseComponents";
-import { indexRoute } from "../../router";
 import { PokemonListItem } from "../../api/pokemon";
+import { Route } from "../../routes";
 
 interface Props {
   filteredPokemons: PokemonListItem[];
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const PokemonGrid: React.FC<Props> = ({ filteredPokemons, perPage }) => {
-  const { page } = indexRoute.useSearch();
+  const { page } = Route.useSearch();
 
   return (
     <Grid>

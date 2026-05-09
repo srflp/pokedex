@@ -3,7 +3,7 @@ import { useQueries, useQuery } from "@tanstack/react-query";
 import TypeFilter from "./TypeFilter";
 import Search from "./Search";
 import PokemonBrowser from "./PokemonBrowser/PokemonBrowser";
-import { indexRoute } from "../router";
+import { Route } from "../routes";
 import {
   fetchPokemonList,
   fetchPokemonNamesByType,
@@ -37,7 +37,7 @@ const filterPokemons = (
 };
 
 const ListView: React.FC = () => {
-  const { q, types } = indexRoute.useSearch();
+  const { q, types } = Route.useSearch();
 
   const { data: pokemons = [] } = useQuery({
     queryKey: ["pokemon-list"],

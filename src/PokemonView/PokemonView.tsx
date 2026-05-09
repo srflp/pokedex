@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "@tanstack/react-router";
 import styled from "styled-components";
-import { pokemonRoute, router } from "../router";
+import { Route } from "../routes/pokemon.$pokemonName";
 import { fetchPokemonDetail } from "../api/pokemon";
 import { capitalize } from "../common/helpers";
 import { BrightSection, Flex } from "../components/BaseComponents";
@@ -24,7 +25,8 @@ const TypeBadge = styled.div<{ type: string }>`
 `;
 
 const PokemonView: React.FC = () => {
-  const { pokemonName } = pokemonRoute.useParams();
+  const { pokemonName } = Route.useParams();
+  const router = useRouter();
 
   const { data: pokemon } = useQuery({
     queryKey: ["pokemon-detail", pokemonName],

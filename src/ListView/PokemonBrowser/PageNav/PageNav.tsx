@@ -1,10 +1,9 @@
 import React, { useCallback, useRef } from "react";
 import styled from "styled-components";
-import { useNavigate } from "@tanstack/react-router";
 import PageNumberInput from "./PageNumberInput";
 import { Flex } from "../../../components/BaseComponents";
 import Button from "../../../components/Button";
-import { indexRoute } from "../../../router";
+import { Route } from "../../../routes";
 
 const Nav = styled.nav`
   display: flex;
@@ -29,13 +28,9 @@ interface Props {
   isTop?: boolean;
 }
 
-const PageNav: React.FC<Props> = ({
-  pokemonBrowserRef,
-  totalPages,
-  isTop,
-}) => {
-  const navigate = useNavigate({ from: indexRoute.fullPath });
-  const { page: currentPage } = indexRoute.useSearch();
+const PageNav: React.FC<Props> = ({ pokemonBrowserRef, totalPages, isTop }) => {
+  const navigate = Route.useNavigate();
+  const { page: currentPage } = Route.useSearch();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const setPage = useCallback(
