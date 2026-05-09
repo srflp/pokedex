@@ -1,6 +1,6 @@
 import React from "react";
 import { capitalize } from "../common/helpers";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import pokemonTypeColors from "../common/pokemonTypeColors";
 import { FlexCentered, BrightSection } from "../components/BaseComponents";
 import Loader from "../components/Loader";

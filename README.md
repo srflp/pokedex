@@ -20,11 +20,12 @@ A `pokedex` directory will be created with the project. Go into it and install t
 
 `pnpm install`
 
-After installing the modules, the app can be started with `pnpm start`.
+After installing the modules, the app can be started with `pnpm dev`.
 It should start on port 3000.
 
 ## Changelog
 
+- **2026-05-09** — Migrated the build tool from Create React App (`react-scripts`) to Vite. Dev server and production build are now powered by Vite; `styled-components/macro` imports were replaced with plain `styled-components` (display names preserved via `babel-plugin-styled-components` in `vite.config.ts`).
 - **2026-05-09** — Pinned Node.js to v24, switched tooling to pnpm, and added a Playwright end-to-end smoke suite running on each PR against the Netlify deploy preview and weekly against production.
 - **2023-01-31** — Migrated to pnpm and bumped all dependencies.
 - **2020-06-19** — Migrated state management to Redux and Redux Saga.

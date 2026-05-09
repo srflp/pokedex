@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { page } from "../../../store/page/pageSlice";
 import { useTypedSelector } from "../../../configureStore";
 import { useDispatch } from "react-redux";
