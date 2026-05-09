@@ -1,5 +1,7 @@
 # Pokédex
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/81b36aa8-9ffb-4018-a185-c02d2c232861/deploy-status)](https://app.netlify.com/projects/alledex/deploys)
+
 Pokédex is a web application written in TypeScript using the React library. It is a list of Pokémon with the ability to filter by type, search by name, and view details about each Pokémon.
 
 This project was created as a recruitment task for a summer internship at Allegro (2020).
