@@ -9,7 +9,8 @@
   },
   "rules": {
     "import/no-named-as-default": "off",
-    "typescript/consistent-type-imports": "error"
+    "typescript/consistent-type-imports": "error",
+    "typescript/consistent-type-exports": "error"
   },
   "ignorePatterns": [
     "dist",
