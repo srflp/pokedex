@@ -44,14 +44,14 @@ const ButtonContainer = styled.div`
   flex-flow: row wrap;
 `;
 
-const Button = styled.button<{ selected: boolean }>`
+const Button = styled.button<{ $selected: boolean; $color: string }>`
   font-size: 1rem;
-  font-weight: ${(props) => (props.selected ? 500 : "normal")};
-  color: ${(props) => (props.selected ? "white" : "#594a4e")};
-  background-color: ${(props) => (props.selected ? props.color : "white")};
+  font-weight: ${(props) => (props.$selected ? 500 : "normal")};
+  color: ${(props) => (props.$selected ? "white" : "#594a4e")};
+  background-color: ${(props) => (props.$selected ? props.$color : "white")};
   border-radius: 0.5rem;
-  border: ${(props) => "1px solid " + props.color};
-  flex-grow: ${(props) => (props.selected ? "3" : "1")};
+  border: ${(props) => "1px solid " + props.$color};
+  flex-grow: ${(props) => (props.$selected ? "3" : "1")};
   flex-basis: 0;
   padding: 0.5rem 0.75rem;
   margin: 0.25rem 0.25rem;
@@ -64,7 +64,7 @@ const Button = styled.button<{ selected: boolean }>`
 
   &:active {
     color: white;
-    background-color: ${(props) => props.color};
+    background-color: ${(props) => props.$color};
   }
 `;
 
@@ -98,8 +98,8 @@ export const TypeFilter: React.FC = () => {
           <ButtonContainer>
             <Button
               onClick={() => setTypes([])}
-              selected={selectedTypes.length === 0}
-              color={pokemonTypeColors["none"]}
+              $selected={selectedTypes.length === 0}
+              $color={pokemonTypeColors["none"]}
             >
               All
             </Button>
@@ -108,8 +108,8 @@ export const TypeFilter: React.FC = () => {
                 key={type}
                 value={type}
                 onClick={() => toggleType(type)}
-                selected={selectedTypes.includes(type)}
-                color={pokemonTypeColors[type]}
+                $selected={selectedTypes.includes(type)}
+                $color={pokemonTypeColors[type]}
               >
                 {capitalize(type)}
               </Button>

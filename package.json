@@ -6,13 +6,12 @@
   "dependencies": {
     "@tanstack/react-query": "^5.100.9",
     "@tanstack/react-router": "^1.169.2",
-    "@types/node": "^18.11.18",
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
-    "@types/styled-components": "^5.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "styled-components": "^5.0.1"
+    "@types/node": "^24.12.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "styled-components": "^6.4.1"
   },
   "scripts": {
     "dev": "vite",
@@ -24,9 +23,11 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1",
+    "@rolldown/plugin-babel": "^0.2.3",
     "@tanstack/router-plugin": "^1.167.35",
     "@typescript/native-preview": "7.0.0-dev.20260508.1",
     "@vitejs/plugin-react": "^6.0.1",
+    "babel-plugin-react-compiler": "^1.0.0",
     "prettier": "2.8.3",
     "vite": "^8.0.11"
   }

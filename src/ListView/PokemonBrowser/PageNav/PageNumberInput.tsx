@@ -18,7 +18,7 @@ const PageNumberInputStyled = styled.input`
 
 interface Props {
   className?: string;
-  inputRef: React.RefObject<HTMLInputElement>;
+  inputRef: React.RefObject<HTMLInputElement | null>;
   totalPages: number;
 }
 

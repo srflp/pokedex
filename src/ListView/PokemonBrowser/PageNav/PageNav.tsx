@@ -23,7 +23,7 @@ const PageNumber = styled.p`
 `;
 
 interface Props {
-  pokemonBrowserRef: React.RefObject<HTMLElement>;
+  pokemonBrowserRef: React.RefObject<HTMLElement | null>;
   totalPages: number;
   isTop?: boolean;
 }
@@ -48,12 +48,12 @@ export const PageNav: React.FC<Props> = ({
   return (
     <Nav>
       <Flex>
-        <Button onClick={() => setPage(1)} hide={currentPage === 1}>
+        <Button onClick={() => setPage(1)} $hide={currentPage === 1}>
           &lt;&lt;
         </Button>
         <Button
           onClick={() => setPage(currentPage - 1)}
-          hide={currentPage === 1}
+          $hide={currentPage === 1}
         >
           &lt; prev
         </Button>
@@ -65,13 +65,13 @@ export const PageNav: React.FC<Props> = ({
       <Flex>
         <Button
           onClick={() => setPage(currentPage + 1)}
-          hide={currentPage === totalPages}
+          $hide={currentPage === totalPages}
         >
           next &gt;
         </Button>
         <Button
           onClick={() => setPage(totalPages)}
-          hide={currentPage === totalPages}
+          $hide={currentPage === totalPages}
         >
           &gt;&gt;
         </Button>

@@ -11,12 +11,12 @@ import { Loader } from "../components/Loader";
 import { pokemonTypeColors } from "../common/pokemonTypeColors";
 import { Stat } from "./Stat";
 
-const TypeBadge = styled.div<{ type: string }>`
+const TypeBadge = styled.div<{ $type: string }>`
   font-size: 0.9rem;
   font-weight: 500;
   color: white;
   border-radius: 5px;
-  background-color: ${(props) => pokemonTypeColors[props.type]};
+  background-color: ${(props) => pokemonTypeColors[props.$type]};
   padding: 0.5rem;
   margin-right: 0.25rem;
   &:last-child {
@@ -66,7 +66,7 @@ export const PokemonView: React.FC = () => {
             />
             <Flex>
               {pokemon.types.map((type) => (
-                <TypeBadge key={type} type={type}>
+                <TypeBadge key={type} $type={type}>
                   {capitalize(type)}
                 </TypeBadge>
               ))}

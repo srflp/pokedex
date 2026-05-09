@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import styled from "styled-components";
 import { capitalize } from "../../common/helpers";
 import { useNavigate } from "@tanstack/react-router";
-import loaderSmall from "../../common/loader-small.png";
 
 export const Tile = styled(TileBase)`
   height: 100%;
@@ -31,32 +30,23 @@ const Shadow = React.memo(styled.div`
   background: #fffcfa;
 `);
 
-// eslint-disable-next-line jsx-a11y/alt-text
-const GridImage = styled(({ pixelated, ...props }) => <img {...props} />)<{
-  pixelated: boolean;
-}>`
+const GridImage = styled.img<{ $pixelated: boolean }>`
   position: absolute;
   height: 100%;
-  image-rendering: ${(props) => (props.pixelated ? "crisp-edges" : "smooth")};
+  image-rendering: ${(props) => (props.$pixelated ? "crisp-edges" : "smooth")};
   -ms-interpolation-mode: ${(props) =>
-    props.pixelated ? "nearest-neighbor" : "smooth"};
+    props.$pixelated ? "nearest-neighbor" : "smooth"};
   image-rendering: ${(props) =>
-    props.pixelated ? "-webkit-optimize-contrast" : "smooth"};
+    props.$pixelated ? "-webkit-optimize-contrast" : "smooth"};
   image-rendering: ${(props) =>
-    props.pixelated ? "-moz-crisp-edges" : "smooth"};
-  image-rendering: ${(props) => (props.pixelated ? "-o-pixelated" : "smooth")};
-  image-rendering: ${(props) => (props.pixelated ? "pixelated" : "smooth")};
+    props.$pixelated ? "-moz-crisp-edges" : "smooth"};
+  image-rendering: ${(props) => (props.$pixelated ? "-o-pixelated" : "smooth")};
+  image-rendering: ${(props) => (props.$pixelated ? "pixelated" : "smooth")};
   z-index: 1;
   transition: all 90ms ease-in-out;
   &:hover {
     transform: scale(1.1);
   }
-`;
-
-const Loader = styled.img`
-  position: absolute;
-  height: 100%;
-  z-index: 1;
 `;
 
 const Label = styled.div`
@@ -102,8 +92,7 @@ function TileBase({ className, imgSrc, name, pokemonId }: TileProps) {
         onError={setDefaultImage}
         id={name}
         onClick={() => showPokemon()}
-        loader={<Loader src={loaderSmall} />}
-        pixelated={pokemonId < 722}
+        $pixelated={pokemonId < 722}
       />
       <Shadow />
     </TileContainer>
