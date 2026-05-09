@@ -73,7 +73,7 @@ const parsePokemonDetail = (pokemon: PokeAPI.Pokemon): PokemonDetail => ({
   id: pokemon.id,
   name: pokemon.name,
   types: pokemon.types
-    .sort((a, b) => a.slot - b.slot)
+    .toSorted((a, b) => a.slot - b.slot)
     .map((typeObj) => typeObj.type.name),
   stats: pokemon.stats.map((statObj) => ({
     id: statObj.stat.name,

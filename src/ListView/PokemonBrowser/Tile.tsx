@@ -70,12 +70,13 @@ interface TileProps {
   pokemonId: number;
 }
 
+const setDefaultImage = (e: React.SyntheticEvent) => {
+  (e.target as HTMLImageElement).src =
+    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png";
+};
+
 function TileBase({ className, imgSrc, name, pokemonId }: TileProps) {
   const navigate = useNavigate();
-  const setDefaultImage = (e: React.SyntheticEvent) => {
-    (e.target as HTMLImageElement).src =
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png";
-  };
   const showPokemon = useCallback(() => {
     navigate({
       to: "/pokemon/$pokemonName",

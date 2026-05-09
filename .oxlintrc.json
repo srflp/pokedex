@@ -1,0 +1,19 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "jsx-a11y", "unicorn", "import"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "warn",
+    "style": "off"
+  },
+  "rules": {
+    "import/no-named-as-default": "off"
+  },
+  "ignorePatterns": [
+    "dist",
+    "playwright-report",
+    "test-results",
+    "src/routeTree.gen.ts"
+  ]
+}

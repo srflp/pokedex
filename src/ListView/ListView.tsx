@@ -30,8 +30,8 @@ const filterPokemons = (
   if (search) {
     result = result
       .filter((p) => p.name.includes(search))
-      .sort((a, b) => (a.name < b.name ? -1 : 1))
-      .sort((a, b) => a.name.indexOf(search) - b.name.indexOf(search));
+      .toSorted((a, b) => (a.name < b.name ? -1 : 1))
+      .toSorted((a, b) => a.name.indexOf(search) - b.name.indexOf(search));
   }
   return result;
 };
