@@ -41,7 +41,7 @@ export const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
 
   const setPage = useCallback(
     (next: number) => navigate({ search: (prev) => ({ ...prev, page: next }) }),
-    [navigate]
+    [navigate],
   );
 
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -73,7 +73,7 @@ export const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
         inputRef?.current?.blur();
       }
     },
-    [updatePageNumber, inputRef]
+    [updatePageNumber, inputRef],
   );
 
   const handleFocus = useCallback((e: FocusEvent<HTMLInputElement>) => {

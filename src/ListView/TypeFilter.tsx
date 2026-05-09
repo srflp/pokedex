@@ -89,7 +89,7 @@ export const TypeFilter = () => {
     setTypes(
       selectedTypes.includes(type)
         ? selectedTypes.filter((t) => t !== type)
-        : [...selectedTypes, type]
+        : [...selectedTypes, type],
     );
   };
 
