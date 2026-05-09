@@ -1,21 +1,22 @@
 # Pokédex
 
-Pokédex to aplikacja webowa napisana w TypeScripcie w bibliotece React. Jest to lista Pokemonów z możliwością filtrowania po typie, wyszukiwania po nazwie oraz obejrzenia detali o każdym z Pokemonów.
+Pokédex is a web application written in TypeScript using the React library. It is a list of Pokémon with the ability to filter by type, search by name, and view details about each Pokémon.
 
-Ten projekt powstał jako zadanie rekrutacyjne na staż letni w Allegro (2020).
+This project was created as a recruitment task for a summer internship at Allegro (2020).
 
-[Przejdź do Pokédexa!](https://alledex.netlify.app/) 
+[Go to the Pokédex!](https://alledex.netlify.app/)
 
-^ W tym miejscu uruchomiona jest zawsze najświeższa wersja aplikacji.
+^ The latest version of the application is always running here.
 
-## Instalacja
-Jeśli chcesz uruchomić ten projekt lokalnie na swoim komputerze, przejdź do katalogu z projektami, a nastepnie sklonuj to repo:
+## Installation
+
+If you want to run this project locally on your computer, navigate to your projects directory and clone this repo:
 
 `git clone https://github.com/srflp/pokedex.git`
 
-Utworzony zostanie katalog `pokedex` z projektem, przejdź do niego i zainstaluj wymagane moduły:
+A `pokedex` directory will be created with the project. Go into it and install the required modules:
 
-`yarn install` lub `npm install`
+`pnpm install`
 
-Po instalacji modułów, aplikację można uruchomić za pomocą `yarn start` lub `npm start`.
-Powinna uruchomić się na porcie 3000.
+After installing the modules, the app can be started with `pnpm start`.
+It should start on port 3000.
