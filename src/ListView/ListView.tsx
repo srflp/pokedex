@@ -4,11 +4,8 @@ import { TypeFilter } from "./TypeFilter";
 import { Search } from "./Search";
 import { PokemonBrowser } from "./PokemonBrowser/PokemonBrowser";
 import { Route } from "../routes";
-import {
-  fetchPokemonList,
-  fetchPokemonNamesByType,
-  PokemonListItem,
-} from "../api/pokemon";
+import type { PokemonListItem } from "../api/pokemon";
+import { fetchPokemonList, fetchPokemonNamesByType } from "../api/pokemon";
 
 const PER_PAGE = 60;
 
@@ -30,8 +27,8 @@ const filterPokemons = (
   if (search) {
     result = result
       .filter((p) => p.name.includes(search))
-      .sort((a, b) => (a.name < b.name ? -1 : 1))
-      .sort((a, b) => a.name.indexOf(search) - b.name.indexOf(search));
+      .toSorted((a, b) => (a.name < b.name ? -1 : 1))
+      .toSorted((a, b) => a.name.indexOf(search) - b.name.indexOf(search));
   }
   return result;
 };
