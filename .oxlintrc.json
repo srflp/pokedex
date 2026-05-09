@@ -11,7 +11,19 @@
     "import/no-named-as-default": "off",
     "react/react-in-jsx-scope": "off",
     "typescript/consistent-type-imports": "error",
-    "typescript/consistent-type-exports": "error"
+    "typescript/consistent-type-exports": "error",
+    "no-restricted-imports": [
+      "warn",
+      {
+        "paths": [
+          {
+            "name": "react",
+            "importNames": ["memo", "useMemo", "useCallback"],
+            "message": "React Compiler memoizes automatically — drop manual memoization."
+          }
+        ]
+      }
+    ]
   },
   "ignorePatterns": [
     "dist",

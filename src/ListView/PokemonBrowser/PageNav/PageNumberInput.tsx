@@ -3,7 +3,6 @@ import {
   type FocusEvent,
   type KeyboardEvent,
   type RefObject,
-  useCallback,
   useEffect,
   useState,
 } from "react";
@@ -30,6 +29,10 @@ interface Props {
   totalPages: number;
 }
 
+const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
+  e.target.select();
+};
+
 export const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
   const navigate = Route.useNavigate();
   const { page: currentPage } = Route.useSearch();
@@ -39,17 +42,15 @@ export const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
     setInputValue(currentPage.toString());
   }, [currentPage]);
 
-  const setPage = useCallback(
-    (next: number) => navigate({ search: (prev) => ({ ...prev, page: next }) }),
-    [navigate],
-  );
+  const setPage = (next: number) =>
+    navigate({ search: (prev) => ({ ...prev, page: next }) });
 
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const numericValue = e.target.value.replace(/\D/, "");
     setInputValue(numericValue);
-  }, []);
+  };
 
-  const updatePageNumber = useCallback(() => {
+  const updatePageNumber = () => {
     if (inputValue !== "") {
       const parsedPage = parseInt(inputValue.slice(-2));
       if (parsedPage < 1) {
@@ -64,21 +65,14 @@ export const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
     } else {
       setInputValue(currentPage.toString());
     }
-  }, [inputValue, currentPage, totalPages, setPage]);
+  };
 
-  const handleEnter = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.keyCode === 13) {
-        updatePageNumber();
-        inputRef?.current?.blur();
-      }
-    },
-    [updatePageNumber, inputRef],
-  );
-
-  const handleFocus = useCallback((e: FocusEvent<HTMLInputElement>) => {
-    e.target.select();
-  }, []);
+  const handleEnter = (e: KeyboardEvent) => {
+    if (e.keyCode === 13) {
+      updatePageNumber();
+      inputRef?.current?.blur();
+    }
+  };
 
   return (
     <PageNumberInputStyled
