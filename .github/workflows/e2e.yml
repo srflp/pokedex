@@ -13,20 +13,24 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
 
-      - uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version-file: .nvmrc
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - run: pnpm exec playwright install --with-deps chromium
+      - name: Install Playwright browser
+        run: pnpm exec playwright install --with-deps chromium
 
-      # PR runs: wait for Netlify deploy preview and grab its URL.
       - name: Wait for Netlify deploy preview
         if: github.event_name == 'pull_request'
         id: netlify
@@ -35,20 +39,20 @@ jobs:
           site_name: alledex
           max_timeout: 300
 
-      - name: Resolve base URL
-        id: base-url
-        run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            echo "url=${{ steps.netlify.outputs.url }}" >> "$GITHUB_OUTPUT"
-          else
-            echo "url=https://alledex.netlify.app" >> "$GITHUB_OUTPUT"
-          fi
-
-      - run: pnpm exec playwright test
+      - name: Test against Netlify preview
+        if: github.event_name == 'pull_request'
+        run: pnpm exec playwright test
         env:
-          PLAYWRIGHT_BASE_URL: ${{ steps.base-url.outputs.url }}
+          PLAYWRIGHT_BASE_URL: ${{ steps.netlify.outputs.url }}
 
-      - if: failure()
+      - name: Test against production
+        if: github.event_name != 'pull_request'
+        run: pnpm exec playwright test
+        env:
+          PLAYWRIGHT_BASE_URL: https://alledex.netlify.app
+
+      - name: Upload Playwright report
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
