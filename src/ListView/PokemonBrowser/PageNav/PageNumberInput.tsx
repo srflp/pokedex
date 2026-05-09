@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { clsx } from "clsx";
 import { Route } from "../../../routes";
 import { pageNumberInput } from "./PageNumberInput.css";
 
@@ -64,7 +65,7 @@ export const PageNumberInput = ({ className, totalPages }: Props) => {
     <input
       ref={inputRef}
       type="text"
-      className={[pageNumberInput, className].filter(Boolean).join(" ")}
+      className={clsx(pageNumberInput, className)}
       value={inputValue}
       onChange={handleChange}
       onFocus={handleFocus}

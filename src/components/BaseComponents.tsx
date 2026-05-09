@@ -1,4 +1,5 @@
 import type { HTMLAttributes, Ref } from "react";
+import { clsx } from "clsx";
 import {
   brightSection,
   container,
@@ -7,35 +8,32 @@ import {
   grid,
 } from "./BaseComponents.css";
 
-const cx = (...classes: (string | undefined)[]) =>
-  classes.filter(Boolean).join(" ");
-
 export const Container = ({
   className,
   ...rest
 }: HTMLAttributes<HTMLDivElement>) => (
-  <div className={cx(container, className)} {...rest} />
+  <div className={clsx(container, className)} {...rest} />
 );
 
 export const Grid = ({
   className,
   ...rest
 }: HTMLAttributes<HTMLDivElement>) => (
-  <div className={cx(grid, className)} {...rest} />
+  <div className={clsx(grid, className)} {...rest} />
 );
 
 export const Flex = ({
   className,
   ...rest
 }: HTMLAttributes<HTMLDivElement>) => (
-  <div className={cx(flex, className)} {...rest} />
+  <div className={clsx(flex, className)} {...rest} />
 );
 
 export const FlexCentered = ({
   className,
   ...rest
 }: HTMLAttributes<HTMLDivElement>) => (
-  <div className={cx(flexCentered, className)} {...rest} />
+  <div className={clsx(flexCentered, className)} {...rest} />
 );
 
 interface BrightSectionProps extends HTMLAttributes<HTMLElement> {
@@ -48,5 +46,5 @@ export const BrightSection = ({
   className,
   ...rest
 }: BrightSectionProps) => (
-  <Tag className={cx(brightSection, className)} {...rest} />
+  <Tag className={clsx(brightSection, className)} {...rest} />
 );
