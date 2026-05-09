@@ -11,7 +11,7 @@ const parsePokemon = ({
   name,
   url,
 }: PokeAPI.NamedAPIResource): PokemonListItem => {
-  const id = parseInt(url.split("/").slice(-2)[0]);
+  const id = parseInt(url.split("/").slice(-2)[0] ?? "0");
   return {
     id,
     name,
@@ -77,7 +77,7 @@ const parsePokemonDetail = (pokemon: PokeAPI.Pokemon): PokemonDetail => ({
     .map((typeObj) => typeObj.type.name),
   stats: pokemon.stats.map((statObj) => ({
     id: statObj.stat.name,
-    emoji: statNameToEmoji[statObj.stat.name],
+    emoji: statNameToEmoji[statObj.stat.name] ?? "",
     name: statObj.stat.name
       .split("-")
       .map((name) => (name === "hp" ? "HP" : capitalize(name)))

@@ -83,7 +83,10 @@ export const PokemonView: React.FC = () => {
                 <Stat
                   key={stat.id}
                   max={pokemon.maxStatValue}
-                  color={pokemonTypeColors[pokemon.types[0]]}
+                  color={
+                    pokemonTypeColors[pokemon.types[0] ?? "none"] ??
+                    pokemonTypeColors.none
+                  }
                   {...stat}
                 />
               ))}
