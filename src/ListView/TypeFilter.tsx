@@ -109,7 +109,7 @@ export const TypeFilter: React.FC = () => {
                 value={type}
                 onClick={() => toggleType(type)}
                 $selected={selectedTypes.includes(type)}
-                $color={pokemonTypeColors[type]}
+                $color={pokemonTypeColors[type] ?? pokemonTypeColors.none}
               >
                 {capitalize(type)}
               </Button>

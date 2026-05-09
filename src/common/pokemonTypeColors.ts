@@ -1,4 +1,4 @@
-export const pokemonTypeColors: { [key: string]: string } = {
+export const pokemonTypeColors: { none: string; [key: string]: string } = {
   none: "#b4b4b4",
   normal: "#A8A77A",
   fire: "#EE8130",
