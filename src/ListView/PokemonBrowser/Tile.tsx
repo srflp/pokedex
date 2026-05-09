@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import { capitalize } from "../../common/helpers";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
 import loaderSmall from "../../common/loader-small.png";
 
 const TileStyled = styled(Tile)`
@@ -87,8 +87,10 @@ function Tile({ className, imgSrc, name, pokemonId }: TileProps) {
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png";
   };
   const showPokemon = useCallback(() => {
-    const path = `pokemon/${name}`;
-    navigate(path);
+    navigate({
+      to: "/pokemon/$pokemonName",
+      params: { pokemonName: name },
+    });
   }, [name, navigate]);
 
   return (

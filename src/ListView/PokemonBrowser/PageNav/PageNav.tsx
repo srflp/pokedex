@@ -1,13 +1,10 @@
 import React, { useCallback, useRef } from "react";
 import styled from "styled-components";
-import { Dispatch } from "redux";
-import { useDispatch } from "react-redux";
-import { useTypedSelector } from "../../../configureStore";
-import { page, PageAction } from "../../../store/page/pageSlice";
+import { useNavigate } from "@tanstack/react-router";
 import PageNumberInput from "./PageNumberInput";
 import { Flex } from "../../../components/BaseComponents";
 import Button from "../../../components/Button";
-import totalSelector from "../../../store/page/totalSelector";
+import { indexRoute } from "../../../router";
 
 const Nav = styled.nav`
   display: flex;
@@ -28,53 +25,53 @@ const PageNumber = styled.p`
 
 interface Props {
   pokemonBrowserRef: React.RefObject<HTMLElement>;
+  totalPages: number;
   isTop?: boolean;
 }
 
-const PageNav: React.FC<Props> = ({ pokemonBrowserRef, isTop }) => {
-  const dispatch = useDispatch<Dispatch<PageAction>>();
-  const currentPage = useTypedSelector((state) => state.page.current);
-  const totalPages = useTypedSelector(totalSelector);
+const PageNav: React.FC<Props> = ({
+  pokemonBrowserRef,
+  totalPages,
+  isTop,
+}) => {
+  const navigate = useNavigate({ from: indexRoute.fullPath });
+  const { page: currentPage } = indexRoute.useSearch();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleNavButtonClick = useCallback(
-    (action: PageAction) => {
-      dispatch(action);
+  const setPage = useCallback(
+    (next: number) => {
+      navigate({ search: (prev) => ({ ...prev, page: next }) });
       if (!isTop) pokemonBrowserRef.current?.scrollIntoView();
     },
-    [pokemonBrowserRef, isTop, dispatch]
+    [navigate, pokemonBrowserRef, isTop]
   );
 
   return (
     <Nav>
       <Flex>
-        <Button
-          onClick={() => handleNavButtonClick(page.setCurrent(1))}
-          hide={currentPage === 1}
-        >
+        <Button onClick={() => setPage(1)} hide={currentPage === 1}>
           &lt;&lt;
         </Button>
         <Button
-          onClick={() => handleNavButtonClick(page.prev())}
+          onClick={() => setPage(currentPage - 1)}
           hide={currentPage === 1}
         >
           &lt; prev
         </Button>
       </Flex>
       <PageNumber onClick={() => inputRef?.current?.focus()}>
-        page <PageNumberInput inputRef={inputRef} />/{totalPages}
+        page <PageNumberInput inputRef={inputRef} totalPages={totalPages} />/
+        {totalPages}
       </PageNumber>
       <Flex>
         <Button
-          onClick={() => {
-            handleNavButtonClick(page.next());
-          }}
+          onClick={() => setPage(currentPage + 1)}
           hide={currentPage === totalPages}
         >
           next &gt;
         </Button>
         <Button
-          onClick={() => dispatch(page.setCurrent(totalPages))}
+          onClick={() => setPage(totalPages)}
           hide={currentPage === totalPages}
         >
           &gt;&gt;

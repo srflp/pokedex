@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
-import { InitialPokemon, getPokemon } from "./getPokemon";
+import { pokemonRoute, router } from "../router";
+import { fetchPokemonDetail } from "../api/pokemon";
 import { capitalize } from "../common/helpers";
 import { BrightSection, Flex } from "../components/BaseComponents";
 import Button from "../components/Button";
@@ -23,11 +24,13 @@ const TypeBadge = styled.div<{ type: string }>`
 `;
 
 const PokemonView: React.FC = () => {
-  const { pokemonName } = useParams();
-  const [pokemon, setPokemon] = useState<InitialPokemon>({
-    ready: false,
+  const { pokemonName } = pokemonRoute.useParams();
+
+  const { data: pokemon } = useQuery({
+    queryKey: ["pokemon-detail", pokemonName],
+    queryFn: () => fetchPokemonDetail(pokemonName),
+    enabled: Boolean(pokemonName),
   });
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (pokemonName) {
@@ -35,22 +38,13 @@ const PokemonView: React.FC = () => {
     }
   }, [pokemonName]);
 
-  useEffect(() => {
-    if (pokemonName) {
-      (async () => {
-        const pokemon = await getPokemon(pokemonName);
-        setPokemon(pokemon);
-      })();
-    }
-  }, [pokemonName]);
-
   return (
     <BrightSection>
       <Flex style={{ margin: "0.25rem" }}>
-        <Button onClick={() => navigate(-1)}>&lt; back</Button>
+        <Button onClick={() => router.history.back()}>&lt; back</Button>
       </Flex>
       <Flex style={{ flexDirection: "column", alignItems: "center" }}>
-        {!pokemon.ready ? (
+        {!pokemon ? (
           <Loader style={{ maxHeight: "4rem" }} />
         ) : (
           <>
@@ -66,7 +60,6 @@ const PokemonView: React.FC = () => {
             <img
               style={{ margin: "0.5rem" }}
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-              // loader={<LoaderSmall style={{ maxHeight: "4rem" }} />}
               alt={pokemonName}
             />
             <Flex>

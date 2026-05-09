@@ -1,14 +1,13 @@
 import React from "react";
-import { capitalize } from "../common/helpers";
 import styled from "styled-components";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
+import { capitalize } from "../common/helpers";
 import pokemonTypeColors from "../common/pokemonTypeColors";
 import { FlexCentered, BrightSection } from "../components/BaseComponents";
 import Loader from "../components/Loader";
-import { useTypedSelector } from "../configureStore";
-import { selectedTypesActions } from "../store/filter/selectedTypesSlice";
-import { useDispatch } from "react-redux";
-import { typesWithPokemonNamesActions } from "../store/pokemon/typesWithPokemonNames";
-import { page } from "../store/page/pageSlice";
+import { fetchPokemonTypes } from "../api/pokemon";
+import { indexRoute } from "../router";
 
 const FilterTitle = styled.h2`
   font-weight: 500;
@@ -71,14 +70,26 @@ const Button = styled.button<{ selected: boolean }>`
 `;
 
 const TypeFilter: React.FC = () => {
-  const dispatch = useDispatch();
-  const pokemonTypes = useTypedSelector((state) => state.pokemon.types);
-  const pokemonTypesWithNames = useTypedSelector(
-    (state) => state.pokemon.typesWithPokemonNames
-  );
-  const selectedPokemonTypes = useTypedSelector(
-    (state) => state.filter.selectedTypes
-  );
+  const navigate = useNavigate({ from: indexRoute.fullPath });
+  const { types: selectedTypes } = indexRoute.useSearch();
+
+  const { data: pokemonTypes = [] } = useQuery({
+    queryKey: ["pokemon-types"],
+    queryFn: fetchPokemonTypes,
+  });
+
+  const setTypes = (next: string[]) =>
+    navigate({
+      search: (prev) => ({ ...prev, types: next, page: 1 }),
+    });
+
+  const toggleType = (type: string) => {
+    setTypes(
+      selectedTypes.includes(type)
+        ? selectedTypes.filter((t) => t !== type)
+        : [...selectedTypes, type]
+    );
+  };
 
   return (
     <BrightSection>
@@ -87,11 +98,8 @@ const TypeFilter: React.FC = () => {
           <FilterTitle>filter by type</FilterTitle>
           <ButtonContainer>
             <Button
-              onClick={() => {
-                dispatch(selectedTypesActions.clear());
-                dispatch(page.setCurrent(1));
-              }}
-              selected={selectedPokemonTypes.length === 0}
+              onClick={() => setTypes([])}
+              selected={selectedTypes.length === 0}
               color={pokemonTypeColors["none"]}
             >
               All
@@ -100,14 +108,8 @@ const TypeFilter: React.FC = () => {
               <Button
                 key={type}
                 value={type}
-                onClick={() => {
-                  if (!pokemonTypesWithNames.hasOwnProperty(type)) {
-                    dispatch(typesWithPokemonNamesActions.fetchRequested(type));
-                  }
-                  dispatch(selectedTypesActions.toggle(type));
-                  dispatch(page.setCurrent(1));
-                }}
-                selected={selectedPokemonTypes.includes(type)}
+                onClick={() => toggleType(type)}
+                selected={selectedTypes.includes(type)}
                 color={pokemonTypeColors[type]}
               >
                 {capitalize(type)}

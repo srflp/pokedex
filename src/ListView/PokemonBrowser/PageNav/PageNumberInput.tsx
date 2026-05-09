@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import { page } from "../../../store/page/pageSlice";
-import { useTypedSelector } from "../../../configureStore";
-import { useDispatch } from "react-redux";
-import totalSelector from "../../../store/page/totalSelector";
+import { useNavigate } from "@tanstack/react-router";
+import { indexRoute } from "../../../router";
 
 const PageNumberInputStyled = styled.input`
   font-family: "VT323", monospace;
@@ -22,17 +20,23 @@ const PageNumberInputStyled = styled.input`
 interface Props {
   className?: string;
   inputRef: React.RefObject<HTMLInputElement>;
+  totalPages: number;
 }
 
-const PageNumberInput = ({ className, inputRef }: Props) => {
-  const dispatch = useDispatch();
-  const currentPage = useTypedSelector((state) => state.page.current);
-  const totalPages = useTypedSelector(totalSelector);
+const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
+  const navigate = useNavigate({ from: indexRoute.fullPath });
+  const { page: currentPage } = indexRoute.useSearch();
   const [inputValue, setInputValue] = useState(currentPage.toString());
 
   useEffect(() => {
     setInputValue(currentPage.toString());
   }, [currentPage]);
+
+  const setPage = useCallback(
+    (next: number) =>
+      navigate({ search: (prev) => ({ ...prev, page: next }) }),
+    [navigate]
+  );
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const numericValue = e.target.value.replace(/\D/, "");
@@ -43,18 +47,18 @@ const PageNumberInput = ({ className, inputRef }: Props) => {
     if (inputValue !== "") {
       const parsedPage = parseInt(inputValue.slice(-2));
       if (parsedPage < 1) {
-        dispatch(page.setCurrent(1));
+        setPage(1);
         setInputValue(currentPage.toString());
       } else if (parsedPage > totalPages) {
-        dispatch(page.setCurrent(totalPages));
+        setPage(totalPages);
         setInputValue(currentPage.toString());
       } else {
-        dispatch(page.setCurrent(parsedPage));
+        setPage(parsedPage);
       }
     } else {
       setInputValue(currentPage.toString());
     }
-  }, [dispatch, inputValue, setInputValue, currentPage, totalPages]);
+  }, [inputValue, currentPage, totalPages, setPage]);
 
   const handleEnter = useCallback(
     (e: React.KeyboardEvent) => {
