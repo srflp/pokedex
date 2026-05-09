@@ -1,4 +1,4 @@
-import { memo, type SyntheticEvent, useCallback } from "react";
+import type { SyntheticEvent } from "react";
 import styled from "styled-components";
 import { capitalize } from "../../common/helpers";
 import { useNavigate } from "@tanstack/react-router";
@@ -19,7 +19,7 @@ const TileContainer = styled.div`
   margin: auto;
 `;
 
-const Shadow = memo(styled.div`
+const Shadow = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
@@ -28,7 +28,7 @@ const Shadow = memo(styled.div`
   width: 60%;
   padding-top: 60%;
   background: #fffcfa;
-`);
+`;
 
 const GridImage = styled.img<{ $pixelated: boolean }>`
   position: absolute;
@@ -77,12 +77,12 @@ const setDefaultImage = (e: SyntheticEvent) => {
 
 function TileBase({ className, imgSrc, name, pokemonId }: TileProps) {
   const navigate = useNavigate();
-  const showPokemon = useCallback(() => {
+  const showPokemon = () => {
     navigate({
       to: "/pokemon/$pokemonName",
       params: { pokemonName: name },
     });
-  }, [name, navigate]);
+  };
 
   return (
     <TileContainer className={className}>

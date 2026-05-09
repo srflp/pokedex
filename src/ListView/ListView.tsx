@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { TypeFilter } from "./TypeFilter";
 import { Search } from "./Search";
@@ -49,18 +48,17 @@ export const ListView = () => {
     })),
   });
 
-  const pokemonNamesByType = useMemo(() => {
-    const map: Partial<Record<PokemonType, string[]>> = {};
-    types.forEach((type, i) => {
-      const data = typeQueries[i]?.data;
-      if (data) map[type] = data;
-    });
-    return map;
-  }, [types, typeQueries]);
+  const pokemonNamesByType: Partial<Record<PokemonType, string[]>> = {};
+  types.forEach((type, i) => {
+    const data = typeQueries[i]?.data;
+    if (data) pokemonNamesByType[type] = data;
+  });
 
-  const filteredPokemons = useMemo(
-    () => filterPokemons(pokemons, types, pokemonNamesByType, q),
-    [pokemons, types, pokemonNamesByType, q],
+  const filteredPokemons = filterPokemons(
+    pokemons,
+    types,
+    pokemonNamesByType,
+    q,
   );
 
   const totalPages = Math.ceil(filteredPokemons.length / PER_PAGE) || 1;
