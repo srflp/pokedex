@@ -1,7 +1,7 @@
 import React from "react";
 import { Tile } from "./Tile";
 import { Grid } from "../../components/BaseComponents";
-import { PokemonListItem } from "../../api/pokemon";
+import type { PokemonListItem } from "../../api/pokemon";
 import { Route } from "../../routes";
 
 interface Props {

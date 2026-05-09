@@ -8,7 +8,8 @@
     "style": "off"
   },
   "rules": {
-    "import/no-named-as-default": "off"
+    "import/no-named-as-default": "off",
+    "typescript/consistent-type-imports": "error"
   },
   "ignorePatterns": [
     "dist",

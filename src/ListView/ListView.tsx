@@ -4,11 +4,8 @@ import { TypeFilter } from "./TypeFilter";
 import { Search } from "./Search";
 import { PokemonBrowser } from "./PokemonBrowser/PokemonBrowser";
 import { Route } from "../routes";
-import {
-  fetchPokemonList,
-  fetchPokemonNamesByType,
-  PokemonListItem,
-} from "../api/pokemon";
+import type { PokemonListItem } from "../api/pokemon";
+import { fetchPokemonList, fetchPokemonNamesByType } from "../api/pokemon";
 
 const PER_PAGE = 60;
 

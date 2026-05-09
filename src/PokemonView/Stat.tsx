@@ -1,6 +1,6 @@
 import React from "react";
 import { Progress } from "../components/Progress";
-import { PokemonStat } from "../api/pokemon";
+import type { PokemonStat } from "../api/pokemon";
 
 interface Props extends PokemonStat {
   max: number;

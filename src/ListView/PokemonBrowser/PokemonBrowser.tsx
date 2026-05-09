@@ -2,7 +2,7 @@ import React from "react";
 import { BrightSection } from "../../components/BaseComponents";
 import { PageNav } from "./PageNav/PageNav";
 import { PokemonGrid } from "./PokemonGrid";
-import { PokemonListItem } from "../../api/pokemon";
+import type { PokemonListItem } from "../../api/pokemon";
 
 interface Props {
   filteredPokemons: PokemonListItem[];

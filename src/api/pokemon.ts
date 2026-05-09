@@ -1,4 +1,4 @@
-import { PokeAPI } from "../common/pokeApiTypings";
+import type { PokeAPI } from "../common/pokeApiTypings";
 
 export interface PokemonListItem {
   id: number;
