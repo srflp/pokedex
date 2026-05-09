@@ -33,6 +33,7 @@ jobs:
           exclude: "{**/*.map,**/node_modules/**}"
           build-script: "build"
           install-script: "pnpm install --frozen-lockfile"
-          # Vite emits `name-HASH.ext` — strip the 8-char content hash so
-          # the same logical file compares stably across base and head.
-          strip-hash: "-(\\w{8})\\."
+          # Vite emits `name-HASH.ext` — strip the 8-char base64url content
+          # hash (a-z, A-Z, 0-9, _, -) so the same logical file compares
+          # stably across base and head.
+          strip-hash: "-([\\w-]{8})\\."
