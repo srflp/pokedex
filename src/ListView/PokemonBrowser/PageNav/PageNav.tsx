@@ -1,4 +1,4 @@
-import { type RefObject, useRef } from "react";
+import type { RefObject } from "react";
 import { PageNumberInput } from "./PageNumberInput";
 import { Flex } from "../../../components/BaseComponents";
 import { Button } from "../../../components/Button";
@@ -14,7 +14,6 @@ interface Props {
 export const PageNav = ({ pokemonBrowserRef, totalPages, isTop }: Props) => {
   const navigate = Route.useNavigate();
   const { page: currentPage } = Route.useSearch();
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const setPage = (next: number) => {
     navigate({ search: (prev) => ({ ...prev, page: next }) });
@@ -34,11 +33,9 @@ export const PageNav = ({ pokemonBrowserRef, totalPages, isTop }: Props) => {
           &lt; prev
         </Button>
       </Flex>
-      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
-      <p className={pageNumber} onClick={() => inputRef?.current?.focus()}>
-        page <PageNumberInput inputRef={inputRef} totalPages={totalPages} />/
-        {totalPages}
-      </p>
+      <label className={pageNumber}>
+        page <PageNumberInput totalPages={totalPages} />/{totalPages}
+      </label>
       <Flex>
         <Button
           onClick={() => setPage(currentPage + 1)}

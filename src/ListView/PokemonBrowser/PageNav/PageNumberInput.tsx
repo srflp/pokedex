@@ -2,8 +2,8 @@ import {
   type ChangeEvent,
   type FocusEvent,
   type KeyboardEvent,
-  type RefObject,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { Route } from "../../../routes";
@@ -11,7 +11,6 @@ import { pageNumberInput } from "./PageNumberInput.css";
 
 interface Props {
   className?: string;
-  inputRef: RefObject<HTMLInputElement | null>;
   totalPages: number;
 }
 
@@ -19,10 +18,11 @@ const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
   e.target.select();
 };
 
-export const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
+export const PageNumberInput = ({ className, totalPages }: Props) => {
   const navigate = Route.useNavigate();
   const { page: currentPage } = Route.useSearch();
   const [inputValue, setInputValue] = useState(currentPage.toString());
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setInputValue(currentPage.toString());
@@ -56,7 +56,7 @@ export const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
   const handleEnter = (e: KeyboardEvent) => {
     if (e.keyCode === 13) {
       updatePageNumber();
-      inputRef?.current?.blur();
+      inputRef.current?.blur();
     }
   };
 

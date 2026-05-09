@@ -4,8 +4,11 @@ import { recipe } from "@vanilla-extract/recipes";
 export const tile = style({
   position: "relative",
   margin: "auto",
+  display: "block",
   height: "100%",
   width: "100%",
+  color: "inherit",
+  textDecoration: "none",
   selectors: {
     "&:before": {
       content: '" "',
