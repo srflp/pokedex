@@ -1,0 +1,61 @@
+name: e2e
+
+on:
+  pull_request:
+    branches: [main]
+  schedule:
+    # Friday 22:00 UTC — late Friday across US/EU timezones.
+    - cron: "0 22 * * 5"
+  workflow_dispatch:
+
+jobs:
+  playwright:
+    name: chromium
+    runs-on: ubuntu-latest
+    # Image tag must match @playwright/test version in package.json.
+    container:
+      image: mcr.microsoft.com/playwright:v1.59.1-noble
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Wait for Netlify deploy preview
+        if: github.event_name == 'pull_request'
+        id: netlify
+        uses: JakePartusch/wait-for-netlify-action@v1.4
+        with:
+          site_name: alledex
+          max_timeout: 300
+
+      - name: Test against Netlify preview
+        if: github.event_name == 'pull_request'
+        run: pnpm exec playwright test
+        env:
+          PLAYWRIGHT_BASE_URL: ${{ steps.netlify.outputs.url }}
+
+      - name: Test against production
+        if: github.event_name != 'pull_request'
+        run: pnpm exec playwright test
+        env:
+          PLAYWRIGHT_BASE_URL: https://alledex.netlify.app
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14

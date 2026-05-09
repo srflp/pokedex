@@ -25,7 +25,7 @@ It should start on port 3000.
 
 ## Changelog
 
-- **2026-05-09** — Pinned Node.js to v24 and switched tooling to pnpm.
+- **2026-05-09** — Pinned Node.js to v24, switched tooling to pnpm, and added a Playwright end-to-end smoke suite running on each PR against the Netlify deploy preview and weekly against production.
 - **2023-01-31** — Migrated to pnpm and bumped all dependencies.
 - **2020-06-19** — Migrated state management to Redux and Redux Saga.
 - **2020-04-16** — Initial release.
