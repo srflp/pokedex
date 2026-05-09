@@ -1,4 +1,4 @@
-name: format
+name: checks
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   prettier:
-    name: prettier --check
+    name: format
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -19,3 +19,17 @@ jobs:
 
       - name: Check formatting
         run: pnpm format:check
+
+  tsgo:
+    name: typecheck
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Type check
+        run: pnpm typecheck

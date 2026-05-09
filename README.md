@@ -25,6 +25,7 @@ It should start on port 3000.
 
 ## Changelog
 
+- **2026-05-09** — Added a `typecheck` PR check running `tsgo --noEmit` (alongside `format` in a single `checks.yml` workflow with parallel jobs), and dropped the type-check step from the `build` script so Netlify's deploy preview only runs `vite build`.
 - **2026-05-09** — Added a `bundle-size` GitHub Actions workflow using `preactjs/compressed-size-action` that posts a per-file gzip-size diff comment on every PR against `main` (informational, not required).
 - **2026-05-09** — Modernized the toolchain end-to-end: migrated from Create React App to Vite; replaced Redux Toolkit + Redux Saga with TanStack Query and React Router with file-based TanStack Router (filter/search/page state moved to typed URL params); type-checking moved to TypeScript Native Preview (`tsgo`). Bumped React and `react-dom` to v19 with the React Compiler enabled, `styled-components` to v6, and Prettier to v3. Pinned Node 24, switched to pnpm, and added Playwright e2e + Prettier `format:check` GitHub Actions running on every PR. Enabled Renovate with auto-merge on green CI (covering npm, GitHub Actions, and the Playwright container image in `e2e.yml` — bumped in lockstep with `@playwright/test`), and added a `main` branch ruleset requiring `chromium`, `prettier --check`, and `netlify/alledex/deploy-preview` to pass before merge.
 - **2023-01-31** — Migrated to pnpm and bumped all dependencies.

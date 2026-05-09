@@ -15,7 +15,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsgo --noEmit && vite build",
+    "build": "vite build",
     "typecheck": "tsgo --noEmit",
     "preview": "vite preview",
     "format": "prettier --write .",
