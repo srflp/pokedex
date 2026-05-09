@@ -26,7 +26,27 @@ jobs:
 
       - run: pnpm exec playwright install --with-deps chromium
 
+      # PR runs: wait for Netlify deploy preview and grab its URL.
+      - name: Wait for Netlify deploy preview
+        if: github.event_name == 'pull_request'
+        id: netlify
+        uses: JakePartusch/wait-for-netlify-action@v1.4
+        with:
+          site_name: alledex
+          max_timeout: 300
+
+      - name: Resolve base URL
+        id: base-url
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "url=${{ steps.netlify.outputs.url }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "url=https://alledex.netlify.app" >> "$GITHUB_OUTPUT"
+          fi
+
       - run: pnpm exec playwright test
+        env:
+          PLAYWRIGHT_BASE_URL: ${{ steps.base-url.outputs.url }}
 
       - if: failure()
         uses: actions/upload-artifact@v4
