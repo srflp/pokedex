@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 import { capitalize } from "../common/helpers";
@@ -72,7 +71,7 @@ const Button = styled.button<{ $selected: boolean; $color: string }>`
   }
 `;
 
-export const TypeFilter: React.FC = () => {
+export const TypeFilter = () => {
   const navigate = Route.useNavigate();
   const { types: selectedTypes } = Route.useSearch();
 
@@ -90,7 +89,7 @@ export const TypeFilter: React.FC = () => {
     setTypes(
       selectedTypes.includes(type)
         ? selectedTypes.filter((t) => t !== type)
-        : [...selectedTypes, type],
+        : [...selectedTypes, type]
     );
   };
 

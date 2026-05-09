@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { memo, type SyntheticEvent, useCallback } from "react";
 import styled from "styled-components";
 import { capitalize } from "../../common/helpers";
 import { useNavigate } from "@tanstack/react-router";
@@ -19,7 +19,7 @@ const TileContainer = styled.div`
   margin: auto;
 `;
 
-const Shadow = React.memo(styled.div`
+const Shadow = memo(styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
@@ -70,7 +70,7 @@ interface TileProps {
   pokemonId: number;
 }
 
-const setDefaultImage = (e: React.SyntheticEvent) => {
+const setDefaultImage = (e: SyntheticEvent) => {
   (e.target as HTMLImageElement).src =
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png";
 };

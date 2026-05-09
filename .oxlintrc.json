@@ -9,6 +9,7 @@
   },
   "rules": {
     "import/no-named-as-default": "off",
+    "react/react-in-jsx-scope": "off",
     "typescript/consistent-type-imports": "error",
     "typescript/consistent-type-exports": "error"
   },

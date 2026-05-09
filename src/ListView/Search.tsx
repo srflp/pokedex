@@ -1,4 +1,4 @@
-import React from "react";
+import { type ChangeEvent } from "react";
 import styled from "styled-components";
 import { BrightSection } from "../components/BaseComponents";
 import { Route } from "../routes";
@@ -27,11 +27,11 @@ const SearchInput = styled.input`
   }
 `;
 
-export const Search: React.FC = () => {
+export const Search = () => {
   const navigate = Route.useNavigate();
   const { q } = Route.useSearch();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toLowerCase();
     navigate({
       search: (prev) => ({ ...prev, q: value, page: 1 }),

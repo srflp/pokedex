@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 const Stat = styled.div<{ $color: string; $background?: string }>`
@@ -25,13 +24,7 @@ interface Props {
   [key: string]: any;
 }
 
-export const Progress: React.FC<Props> = ({
-  value,
-  max,
-  color,
-  background,
-  ...rest
-}) => {
+export const Progress = ({ value, max, color, background, ...rest }: Props) => {
   return (
     <Stat $color={color} $background={background} {...rest}>
       <span

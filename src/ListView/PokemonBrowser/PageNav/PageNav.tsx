@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import { type RefObject, useCallback, useRef } from "react";
 import styled from "styled-components";
 import { PageNumberInput } from "./PageNumberInput";
 import { Flex } from "../../../components/BaseComponents";
@@ -23,16 +23,12 @@ const PageNumber = styled.p`
 `;
 
 interface Props {
-  pokemonBrowserRef: React.RefObject<HTMLElement | null>;
+  pokemonBrowserRef: RefObject<HTMLElement | null>;
   totalPages: number;
   isTop?: boolean;
 }
 
-export const PageNav: React.FC<Props> = ({
-  pokemonBrowserRef,
-  totalPages,
-  isTop,
-}) => {
+export const PageNav = ({ pokemonBrowserRef, totalPages, isTop }: Props) => {
   const navigate = Route.useNavigate();
   const { page: currentPage } = Route.useSearch();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -42,7 +38,7 @@ export const PageNav: React.FC<Props> = ({
       navigate({ search: (prev) => ({ ...prev, page: next }) });
       if (!isTop) pokemonBrowserRef.current?.scrollIntoView();
     },
-    [navigate, pokemonBrowserRef, isTop],
+    [navigate, pokemonBrowserRef, isTop]
   );
 
   return (

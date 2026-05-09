@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { TypeFilter } from "./TypeFilter";
 import { Search } from "./Search";
@@ -34,7 +34,7 @@ const filterPokemons = (
   return result;
 };
 
-export const ListView: React.FC = () => {
+export const ListView = () => {
   const { q, types } = Route.useSearch();
 
   const { data: pokemons = [] } = useQuery({

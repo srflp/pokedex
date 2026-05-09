@@ -1,4 +1,4 @@
-import React from "react";
+import { useRef } from "react";
 import { BrightSection } from "../../components/BaseComponents";
 import { PageNav } from "./PageNav/PageNav";
 import { PokemonGrid } from "./PokemonGrid";
@@ -10,12 +10,12 @@ interface Props {
   perPage: number;
 }
 
-export const PokemonBrowser: React.FC<Props> = ({
+export const PokemonBrowser = ({
   filteredPokemons,
   totalPages,
   perPage,
-}) => {
-  const pokemonBrowserRef = React.useRef<HTMLElement>(null);
+}: Props) => {
+  const pokemonBrowserRef = useRef<HTMLElement>(null);
 
   return (
     <BrightSection

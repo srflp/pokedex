@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import styled from "styled-components";
@@ -28,7 +28,7 @@ const TypeBadge = styled.div<{ $type: PokemonType }>`
   }
 `;
 
-export const PokemonView: React.FC = () => {
+export const PokemonView = () => {
   const { pokemonName } = Route.useParams();
   const router = useRouter();
 

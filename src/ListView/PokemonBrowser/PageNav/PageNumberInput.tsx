@@ -1,4 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import {
+  type ChangeEvent,
+  type FocusEvent,
+  type KeyboardEvent,
+  type RefObject,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import styled from "styled-components";
 import { Route } from "../../../routes";
 
@@ -18,7 +26,7 @@ const PageNumberInputStyled = styled.input`
 
 interface Props {
   className?: string;
-  inputRef: React.RefObject<HTMLInputElement | null>;
+  inputRef: RefObject<HTMLInputElement | null>;
   totalPages: number;
 }
 
@@ -33,10 +41,10 @@ export const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
 
   const setPage = useCallback(
     (next: number) => navigate({ search: (prev) => ({ ...prev, page: next }) }),
-    [navigate],
+    [navigate]
   );
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const numericValue = e.target.value.replace(/\D/, "");
     setInputValue(numericValue);
   }, []);
@@ -59,16 +67,16 @@ export const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
   }, [inputValue, currentPage, totalPages, setPage]);
 
   const handleEnter = useCallback(
-    (e: React.KeyboardEvent) => {
+    (e: KeyboardEvent) => {
       if (e.keyCode === 13) {
         updatePageNumber();
         inputRef?.current?.blur();
       }
     },
-    [updatePageNumber, inputRef],
+    [updatePageNumber, inputRef]
   );
 
-  const handleFocus = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
+  const handleFocus = useCallback((e: FocusEvent<HTMLInputElement>) => {
     e.target.select();
   }, []);
 
