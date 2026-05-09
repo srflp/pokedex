@@ -16,7 +16,7 @@ const filterPokemons = (
   pokemons: PokemonListItem[],
   selectedTypes: string[],
   pokemonNamesByType: Record<string, string[]>,
-  search: string
+  search: string,
 ): PokemonListItem[] => {
   let result = pokemons;
   if (selectedTypes.length > 0) {
@@ -62,7 +62,7 @@ export const ListView: React.FC = () => {
 
   const filteredPokemons = useMemo(
     () => filterPokemons(pokemons, types, pokemonNamesByType, q),
-    [pokemons, types, pokemonNamesByType, q]
+    [pokemons, types, pokemonNamesByType, q],
   );
 
   const totalPages = Math.ceil(filteredPokemons.length / PER_PAGE) || 1;

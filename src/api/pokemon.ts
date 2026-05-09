@@ -35,7 +35,7 @@ export const fetchPokemonTypes = async (): Promise<string[]> => {
 };
 
 export const fetchPokemonNamesByType = async (
-  type: string
+  type: string,
 ): Promise<string[]> => {
   const res = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
   const json = (await res.json()) as PokeAPI.Type;
@@ -86,17 +86,15 @@ const parsePokemonDetail = (pokemon: PokeAPI.Pokemon): PokemonDetail => ({
   })),
   maxStatValue: pokemon.stats.reduce(
     (max, statObj) => (statObj.base_stat > max ? statObj.base_stat : max),
-    0
+    0,
   ),
   height: (pokemon.height / 10).toString() + " m",
 });
 
 export const fetchPokemonDetail = async (
-  pokemonName: string
+  pokemonName: string,
 ): Promise<PokemonDetail> => {
-  const res = await fetch(
-    `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
-  );
+  const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
   const json = (await res.json()) as PokeAPI.Pokemon;
   return parsePokemonDetail(json);
 };

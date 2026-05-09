@@ -42,7 +42,7 @@ export const PageNav: React.FC<Props> = ({
       navigate({ search: (prev) => ({ ...prev, page: next }) });
       if (!isTop) pokemonBrowserRef.current?.scrollIntoView();
     },
-    [navigate, pokemonBrowserRef, isTop]
+    [navigate, pokemonBrowserRef, isTop],
   );
 
   return (

@@ -3,9 +3,9 @@ import { test, expect } from "@playwright/test";
 test("next-page button advances the page counter", async ({ page }) => {
   await page.goto("/");
 
-  await expect(
-    page.getByAltText("Bulbasaur - a pokemon")
-  ).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByAltText("Bulbasaur - a pokemon")).toBeVisible({
+    timeout: 30_000,
+  });
 
   // The page-number input appears twice (top + bottom nav). Use the first.
   const pageInput = page.getByRole("textbox").first();
