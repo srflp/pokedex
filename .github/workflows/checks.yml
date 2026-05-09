@@ -7,7 +7,7 @@ on:
 
 jobs:
   prettier:
-    name: prettier --check
+    name: format
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -21,7 +21,7 @@ jobs:
         run: pnpm format:check
 
   tsgo:
-    name: tsgo --noEmit
+    name: typecheck
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
