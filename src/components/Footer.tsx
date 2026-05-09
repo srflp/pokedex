@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 const FooterLink = styled.a`
@@ -10,7 +9,7 @@ const FooterLink = styled.a`
   }
 `;
 
-const rawFooter: React.FC<{ className?: string }> = ({ className }) => {
+const rawFooter = ({ className }: { className?: string }) => {
   return (
     <footer className={className}>
       <p style={{ paddingBottom: "0.2rem" }}>

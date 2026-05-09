@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider } from "@tanstack/react-router";
 import { router } from "./router";
 import { createRoot } from "react-dom/client";
-import React, { StrictMode } from "react";
+import { StrictMode } from "react";
 
 const GlobalStyle = createGlobalStyle`
   body {

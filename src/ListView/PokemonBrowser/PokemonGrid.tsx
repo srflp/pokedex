@@ -1,4 +1,3 @@
-import React from "react";
 import { Tile } from "./Tile";
 import { Grid } from "../../components/BaseComponents";
 import type { PokemonListItem } from "../../api/pokemon";
@@ -9,7 +8,7 @@ interface Props {
   perPage: number;
 }
 
-export const PokemonGrid: React.FC<Props> = ({ filteredPokemons, perPage }) => {
+export const PokemonGrid = ({ filteredPokemons, perPage }: Props) => {
   const { page } = Route.useSearch();
 
   return (
