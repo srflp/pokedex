@@ -54,7 +54,7 @@ export const PageNumberInput = ({ className, totalPages }: Props) => {
   };
 
   const handleEnter = (e: KeyboardEvent) => {
-    if (e.keyCode === 13) {
+    if (e.key === "Enter") {
       updatePageNumber();
       inputRef.current?.blur();
     }
