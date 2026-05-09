@@ -8,10 +8,14 @@ import { capitalize } from "../common/helpers";
 import { BrightSection, Flex } from "../components/BaseComponents";
 import { Button } from "../components/Button";
 import { Loader } from "../components/Loader";
-import { pokemonTypeColors } from "../common/pokemonTypeColors";
+import {
+  DEFAULT_TYPE_COLOR,
+  pokemonTypeColors,
+} from "../common/pokemonTypeColors";
+import { type PokemonType } from "../common/pokemonTypes";
 import { Stat } from "./Stat";
 
-const TypeBadge = styled.div<{ $type: string }>`
+const TypeBadge = styled.div<{ $type: PokemonType }>`
   font-size: 0.9rem;
   font-weight: 500;
   color: white;
@@ -84,8 +88,9 @@ export const PokemonView: React.FC = () => {
                   key={stat.id}
                   max={pokemon.maxStatValue}
                   color={
-                    pokemonTypeColors[pokemon.types[0] ?? "none"] ??
-                    pokemonTypeColors.none
+                    pokemon.types[0]
+                      ? pokemonTypeColors[pokemon.types[0]]
+                      : DEFAULT_TYPE_COLOR
                   }
                   {...stat}
                 />

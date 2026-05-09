@@ -6,13 +6,14 @@ import { PokemonBrowser } from "./PokemonBrowser/PokemonBrowser";
 import { Route } from "../routes";
 import type { PokemonListItem } from "../api/pokemon";
 import { fetchPokemonList, fetchPokemonNamesByType } from "../api/pokemon";
+import type { PokemonType } from "../common/pokemonTypes";
 
 const PER_PAGE = 60;
 
 const filterPokemons = (
   pokemons: PokemonListItem[],
-  selectedTypes: string[],
-  pokemonNamesByType: Record<string, string[]>,
+  selectedTypes: PokemonType[],
+  pokemonNamesByType: Partial<Record<PokemonType, string[]>>,
   search: string,
 ): PokemonListItem[] => {
   let result = pokemons;
@@ -49,7 +50,7 @@ export const ListView: React.FC = () => {
   });
 
   const pokemonNamesByType = useMemo(() => {
-    const map: Record<string, string[]> = {};
+    const map: Partial<Record<PokemonType, string[]>> = {};
     types.forEach((type, i) => {
       const data = typeQueries[i]?.data;
       if (data) map[type] = data;
