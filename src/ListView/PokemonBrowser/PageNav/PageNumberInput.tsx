@@ -2,30 +2,16 @@ import {
   type ChangeEvent,
   type FocusEvent,
   type KeyboardEvent,
-  type RefObject,
   useEffect,
+  useRef,
   useState,
 } from "react";
-import styled from "styled-components";
+import { clsx } from "clsx";
 import { Route } from "../../../routes";
-
-const PageNumberInputStyled = styled.input`
-  font-family: "VT323", monospace;
-  font-size: 1.5rem;
-  width: 2ch;
-  color: #33272a;
-  background-color: #faeee7;
-  border: none;
-  border-radius: 4px;
-  text-align: right;
-  appearance: none;
-  outline: none;
-  padding: 0;
-`;
+import { pageNumberInput } from "./PageNumberInput.css";
 
 interface Props {
   className?: string;
-  inputRef: RefObject<HTMLInputElement | null>;
   totalPages: number;
 }
 
@@ -33,10 +19,11 @@ const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
   e.target.select();
 };
 
-export const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
+export const PageNumberInput = ({ className, totalPages }: Props) => {
   const navigate = Route.useNavigate();
   const { page: currentPage } = Route.useSearch();
   const [inputValue, setInputValue] = useState(currentPage.toString());
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setInputValue(currentPage.toString());
@@ -68,17 +55,17 @@ export const PageNumberInput = ({ className, inputRef, totalPages }: Props) => {
   };
 
   const handleEnter = (e: KeyboardEvent) => {
-    if (e.keyCode === 13) {
+    if (e.key === "Enter") {
       updatePageNumber();
-      inputRef?.current?.blur();
+      inputRef.current?.blur();
     }
   };
 
   return (
-    <PageNumberInputStyled
+    <input
       ref={inputRef}
       type="text"
-      className={className}
+      className={clsx(pageNumberInput, className)}
       value={inputValue}
       onChange={handleChange}
       onFocus={handleFocus}
