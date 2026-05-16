@@ -86,9 +86,7 @@ export const PokemonView = () => {
             <div>
               <p className={heightText}>
                 Height:{" "}
-                <span role="img" aria-label={"Height"}>
-                  ↕️
-                </span>{" "}
+                <span aria-hidden="true">↕️</span>{" "}
                 {pokemon.height}
               </p>
             </div>
