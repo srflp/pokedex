@@ -3,6 +3,8 @@ name: e2e
 on:
   pull_request:
     branches: [main]
+  push:
+    branches: [main]
   schedule:
     # Friday 22:00 UTC — late Friday across US/EU timezones.
     - cron: "0 22 * * 5"
@@ -23,25 +25,20 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Wait for Netlify deploy preview
-        if: github.event_name == 'pull_request'
+      - name: Wait for Netlify deploy
+        if: github.event_name == 'pull_request' || github.event_name == 'push'
         id: netlify
-        uses: JakePartusch/wait-for-netlify-action@v1.4
-        with:
-          site_name: alledex
-          max_timeout: 300
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: 81b36aa8-9ffb-4018-a185-c02d2c232861
+          COMMIT_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          CONTEXT: ${{ github.event_name == 'pull_request' && 'deploy-preview' || 'production' }}
+        run: node .github/scripts/wait-for-netlify-deploy.mjs
 
-      - name: Test against Netlify preview
-        if: github.event_name == 'pull_request'
+      - name: Run Playwright
         run: pnpm exec playwright test
         env:
-          PLAYWRIGHT_BASE_URL: ${{ steps.netlify.outputs.url }}
-
-      - name: Test against production
-        if: github.event_name != 'pull_request'
-        run: pnpm exec playwright test
-        env:
-          PLAYWRIGHT_BASE_URL: https://alledex.netlify.app
+          PLAYWRIGHT_BASE_URL: ${{ steps.netlify.outputs.url || 'https://alledex.netlify.app' }}
 
       - name: Upload Playwright report
         if: failure()
