@@ -7,13 +7,7 @@
 
 import { appendFile } from "node:fs/promises";
 
-const {
-  NETLIFY_AUTH_TOKEN,
-  NETLIFY_SITE_ID,
-  COMMIT_SHA,
-  CONTEXT,
-  GITHUB_OUTPUT,
-} = process.env;
+const { NETLIFY_AUTH_TOKEN, NETLIFY_SITE_ID, COMMIT_SHA, CONTEXT, GITHUB_OUTPUT } = process.env;
 if (!NETLIFY_AUTH_TOKEN || !NETLIFY_SITE_ID || !COMMIT_SHA) {
   console.error("missing NETLIFY_AUTH_TOKEN, NETLIFY_SITE_ID, or COMMIT_SHA");
   process.exit(1);
@@ -41,12 +35,8 @@ console.log(
 let deploy;
 const createDeadline = Date.now() + CREATE_TIMEOUT_MS;
 while (Date.now() < createDeadline) {
-  const deploys = await getJson(
-    `https://api.netlify.com/api/v1/sites/${NETLIFY_SITE_ID}/deploys`,
-  );
-  deploy = deploys.find(
-    (d) => d.commit_ref === COMMIT_SHA && (!CONTEXT || d.context === CONTEXT),
-  );
+  const deploys = await getJson(`https://api.netlify.com/api/v1/sites/${NETLIFY_SITE_ID}/deploys`);
+  deploy = deploys.find((d) => d.commit_ref === COMMIT_SHA && (!CONTEXT || d.context === CONTEXT));
   if (deploy) break;
   console.log(`deploy not created yet, retrying in ${INTERVAL_MS / 1000}s`);
   await sleep(INTERVAL_MS);
@@ -71,9 +61,7 @@ while (Date.now() < readyDeadline) {
     console.error(`deploy ${deploy.id} ended in state: ${deploy.state}`);
     process.exit(1);
   }
-  console.log(
-    `deploy state: ${deploy.state}, retrying in ${INTERVAL_MS / 1000}s`,
-  );
+  console.log(`deploy state: ${deploy.state}, retrying in ${INTERVAL_MS / 1000}s`);
   await sleep(INTERVAL_MS);
   deploy = await getJson(
     `https://api.netlify.com/api/v1/sites/${NETLIFY_SITE_ID}/deploys/${deploy.id}`,
