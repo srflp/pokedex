@@ -25,10 +25,5 @@
       }
     ]
   },
-  "ignorePatterns": [
-    "dist",
-    "playwright-report",
-    "test-results",
-    "src/routeTree.gen.ts"
-  ]
+  "ignorePatterns": ["dist", "playwright-report", "test-results", "src/routeTree.gen.ts"]
 }

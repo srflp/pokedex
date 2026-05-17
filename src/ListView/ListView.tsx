@@ -54,12 +54,7 @@ export const ListView = () => {
     if (data) pokemonNamesByType[type] = data;
   });
 
-  const filteredPokemons = filterPokemons(
-    pokemons,
-    types,
-    pokemonNamesByType,
-    q,
-  );
+  const filteredPokemons = filterPokemons(pokemons, types, pokemonNamesByType, q);
 
   const totalPages = Math.ceil(filteredPokemons.length / PER_PAGE) || 1;
 

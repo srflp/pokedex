@@ -26,10 +26,7 @@ export const PageNav = ({ pokemonBrowserRef, totalPages, isTop }: Props) => {
         <Button onClick={() => setPage(1)} hide={currentPage === 1}>
           &lt;&lt;
         </Button>
-        <Button
-          onClick={() => setPage(currentPage - 1)}
-          hide={currentPage === 1}
-        >
+        <Button onClick={() => setPage(currentPage - 1)} hide={currentPage === 1}>
           &lt; prev
         </Button>
       </Flex>
@@ -37,16 +34,10 @@ export const PageNav = ({ pokemonBrowserRef, totalPages, isTop }: Props) => {
         page <PageNumberInput totalPages={totalPages} />/{totalPages}
       </label>
       <Flex>
-        <Button
-          onClick={() => setPage(currentPage + 1)}
-          hide={currentPage === totalPages}
-        >
+        <Button onClick={() => setPage(currentPage + 1)} hide={currentPage === totalPages}>
           next &gt;
         </Button>
-        <Button
-          onClick={() => setPage(totalPages)}
-          hide={currentPage === totalPages}
-        >
+        <Button onClick={() => setPage(totalPages)} hide={currentPage === totalPages}>
           &gt;&gt;
         </Button>
       </Flex>

@@ -1,21 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import { capitalize } from "../common/helpers";
-import {
-  DEFAULT_TYPE_COLOR,
-  pokemonTypeColors,
-} from "../common/pokemonTypeColors";
+import { DEFAULT_TYPE_COLOR, pokemonTypeColors } from "../common/pokemonTypeColors";
 import { type PokemonType } from "../common/pokemonTypes";
 import { FlexCentered, BrightSection } from "../components/BaseComponents";
 import { Loader } from "../components/Loader";
 import { fetchPokemonTypes } from "../api/pokemon";
 import { Route } from "../routes";
-import {
-  buttonContainer,
-  filterButton,
-  filterColorVar,
-  filterTitle,
-} from "./TypeFilter.css";
+import { buttonContainer, filterButton, filterColorVar, filterTitle } from "./TypeFilter.css";
 
 export const TypeFilter = () => {
   const navigate = Route.useNavigate();

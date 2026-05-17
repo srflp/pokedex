@@ -15,13 +15,10 @@ export const Route = createFileRoute("/")({
   validateSearch: (search: Record<string, unknown>): ListSearch => {
     const rawTypes = search.types;
     const types = Array.isArray(rawTypes)
-      ? rawTypes.filter(
-          (t): t is PokemonType => typeof t === "string" && isPokemonType(t),
-        )
+      ? rawTypes.filter((t): t is PokemonType => typeof t === "string" && isPokemonType(t))
       : [];
     const rawPage = search.page;
-    const page =
-      typeof rawPage === "number" && rawPage > 0 ? Math.floor(rawPage) : 1;
+    const page = typeof rawPage === "number" && rawPage > 0 ? Math.floor(rawPage) : 1;
     const q = typeof search.q === "string" ? search.q : "";
     return { q, types, page };
   },

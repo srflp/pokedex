@@ -13,11 +13,9 @@ export const PokemonGrid = ({ filteredPokemons, perPage }: Props) => {
 
   return (
     <Grid>
-      {filteredPokemons
-        .slice(perPage * (page - 1), perPage * page)
-        .map(({ imgUrl, name, id }) => (
-          <Tile key={name} imgSrc={imgUrl} name={name} pokemonId={id} />
-        ))}
+      {filteredPokemons.slice(perPage * (page - 1), perPage * page).map(({ imgUrl, name, id }) => (
+        <Tile key={name} imgSrc={imgUrl} name={name} pokemonId={id} />
+      ))}
     </Grid>
   );
 };

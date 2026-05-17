@@ -16,11 +16,7 @@ const setDefaultImage = (e: SyntheticEvent) => {
 
 export function Tile({ imgSrc, name, pokemonId }: TileProps) {
   return (
-    <Link
-      to="/pokemon/$pokemonName"
-      params={{ pokemonName: name }}
-      className={tile}
-    >
+    <Link to="/pokemon/$pokemonName" params={{ pokemonName: name }} className={tile}>
       <div className={label}>{capitalize(name)}</div>
       <img
         className={gridImage({ pixelated: pokemonId < 722 })}

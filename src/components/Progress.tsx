@@ -9,14 +9,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   background?: string;
 }
 
-export const Progress = ({
-  value,
-  max,
-  color,
-  background,
-  style: styleProp,
-  ...rest
-}: Props) => (
+export const Progress = ({ value, max, color, background, style: styleProp, ...rest }: Props) => (
   <div
     className={stat}
     style={{

@@ -29,8 +29,7 @@ export const PageNumberInput = ({ className, totalPages }: Props) => {
     setInputValue(currentPage.toString());
   }, [currentPage]);
 
-  const setPage = (next: number) =>
-    navigate({ search: (prev) => ({ ...prev, page: next }) });
+  const setPage = (next: number) => navigate({ search: (prev) => ({ ...prev, page: next }) });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const numericValue = e.target.value.replace(/\D/, "");
