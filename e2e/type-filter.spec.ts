@@ -1,14 +1,12 @@
 import { test, expect } from "@playwright/test";
 
-test("type filter restricts the list to the selected type", async ({
-  page,
-}) => {
+test("type filter restricts the list to the selected type", async ({ page }) => {
   await page.goto("/");
 
   // Wait for the type filter to finish its initial fetch.
-  await expect(
-    page.getByRole("button", { name: "Fire", exact: true }),
-  ).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByRole("button", { name: "Fire", exact: true })).toBeVisible({
+    timeout: 30_000,
+  });
 
   await page.getByRole("button", { name: "Fire", exact: true }).click();
 

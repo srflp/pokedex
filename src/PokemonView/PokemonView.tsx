@@ -8,10 +8,7 @@ import { capitalize } from "../common/helpers";
 import { BrightSection, Flex } from "../components/BaseComponents";
 import { Button } from "../components/Button";
 import { Loader } from "../components/Loader";
-import {
-  DEFAULT_TYPE_COLOR,
-  pokemonTypeColors,
-} from "../common/pokemonTypeColors";
+import { DEFAULT_TYPE_COLOR, pokemonTypeColors } from "../common/pokemonTypeColors";
 import { Stat } from "./Stat";
 import {
   backRow,
@@ -75,9 +72,7 @@ export const PokemonView = () => {
                   key={stat.id}
                   max={pokemon.maxStatValue}
                   color={
-                    pokemon.types[0]
-                      ? pokemonTypeColors[pokemon.types[0]]
-                      : DEFAULT_TYPE_COLOR
+                    pokemon.types[0] ? pokemonTypeColors[pokemon.types[0]] : DEFAULT_TYPE_COLOR
                   }
                   {...stat}
                 />

@@ -10,24 +10,12 @@ interface Props {
   perPage: number;
 }
 
-export const PokemonBrowser = ({
-  filteredPokemons,
-  totalPages,
-  perPage,
-}: Props) => {
+export const PokemonBrowser = ({ filteredPokemons, totalPages, perPage }: Props) => {
   const pokemonBrowserRef = useRef<HTMLElement>(null);
 
   return (
-    <BrightSection
-      as="main"
-      ref={pokemonBrowserRef}
-      style={{ padding: "0.5rem" }}
-    >
-      <PageNav
-        pokemonBrowserRef={pokemonBrowserRef}
-        totalPages={totalPages}
-        isTop={true}
-      />
+    <BrightSection as="main" ref={pokemonBrowserRef} style={{ padding: "0.5rem" }}>
+      <PageNav pokemonBrowserRef={pokemonBrowserRef} totalPages={totalPages} isTop={true} />
       <PokemonGrid filteredPokemons={filteredPokemons} perPage={perPage} />
       <PageNav pokemonBrowserRef={pokemonBrowserRef} totalPages={totalPages} />
     </BrightSection>

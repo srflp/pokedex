@@ -8,10 +8,7 @@ export interface PokemonListItem {
   imgUrl: string;
 }
 
-const parsePokemon = ({
-  name,
-  url,
-}: PokeAPI.NamedAPIResource): PokemonListItem => {
+const parsePokemon = ({ name, url }: PokeAPI.NamedAPIResource): PokemonListItem => {
   const id = parseInt(url.split("/").slice(-2)[0] ?? "0");
   return {
     id,
@@ -30,14 +27,10 @@ export const fetchPokemonList = async (): Promise<PokemonListItem[]> => {
 export const fetchPokemonTypes = async (): Promise<PokemonType[]> => {
   const res = await fetch("https://pokeapi.co/api/v2/type");
   const json = await res.json();
-  return (json.results as PokeAPI.NamedAPIResource[])
-    .map((t) => t.name)
-    .filter(isPokemonType);
+  return (json.results as PokeAPI.NamedAPIResource[]).map((t) => t.name).filter(isPokemonType);
 };
 
-export const fetchPokemonNamesByType = async (
-  type: PokemonType,
-): Promise<string[]> => {
+export const fetchPokemonNamesByType = async (type: PokemonType): Promise<string[]> => {
   const res = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
   const json = (await res.json()) as PokeAPI.Type;
   return json.pokemon.map((p) => p.pokemon.name);
@@ -93,9 +86,7 @@ const parsePokemonDetail = (pokemon: PokeAPI.Pokemon): PokemonDetail => ({
   height: (pokemon.height / 10).toString() + " m",
 });
 
-export const fetchPokemonDetail = async (
-  pokemonName: string,
-): Promise<PokemonDetail> => {
+export const fetchPokemonDetail = async (pokemonName: string): Promise<PokemonDetail> => {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
   const json = (await res.json()) as PokeAPI.Pokemon;
   return parsePokemonDetail(json);
