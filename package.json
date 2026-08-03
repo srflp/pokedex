@@ -33,7 +33,7 @@
     "@vanilla-extract/dynamic": "2.1.5",
     "@vanilla-extract/recipes": "0.5.7",
     "@vanilla-extract/vite-plugin": "5.2.2",
-    "@vitejs/plugin-react": "6.0.4",
+    "@vitejs/plugin-react": "6.0.5",
     "babel-plugin-react-compiler": "1.0.0",
     "oxfmt": "0.49.0",
     "oxlint": "1.64.0",
