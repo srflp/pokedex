@@ -19,7 +19,7 @@
     "@tanstack/react-router": "1.169.2",
     "@types/node": "24.12.4",
     "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.5",
+    "@types/react-dom": "19.2.7",
     "clsx": "2.1.1",
     "react": "19.2.8",
     "react-dom": "19.2.8"
